@@ -101,7 +101,7 @@ INSTALLED_APPS = (
     'uni_form',
     'taggit',
 
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.linkedin',
@@ -116,11 +116,20 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-
+    'django.contrib.admin',
+    'django.contrib.comments',
+    'django.contrib.markup',
     'innovation',
     'south',
     'myhacks',
 )
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'publish_stream'],
+        'METHOD': 'js_sdk',
+    }
+}
 
 LOGGING = {
     'version': 1,
