@@ -26,7 +26,7 @@ class BaseHackView(FormView):
         obj = form.save(commit=False)
         obj.user = self.request.user
         obj.save()
-        messages.add_message(self.request, messages.INFO, 'Your Hack has been added!  Thanks!')
+        messages.success(self.request, 'Your Hack has been added!  Thanks!')
         return http.HttpResponseRedirect(self.get_success_url())
 
 
