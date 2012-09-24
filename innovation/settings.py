@@ -156,3 +156,7 @@ LOGGING = {
         },
     }
 }
+
+SOUTH_MIGRATION_MODULES = {
+    'profiles': 'innovation.projectmigrations.profiles',
+}
