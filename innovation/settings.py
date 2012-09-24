@@ -96,6 +96,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'bootstrapform',
     'uni_form',
+    'taggit',
 
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
