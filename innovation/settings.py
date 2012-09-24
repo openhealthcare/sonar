@@ -99,7 +99,7 @@ INSTALLED_APPS = (
     'uni_form',
     'taggit',
 
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.linkedin',
@@ -117,6 +117,13 @@ INSTALLED_APPS = (
     'innovation',
     'south',
 )
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'publish_stream'],
+        'METHOD': 'js_sdk',
+    }
+}
 
 LOGGING = {
     'version': 1,
