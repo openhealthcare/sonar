@@ -1,0 +1,15 @@
+{% extends "myhacks_base.html" %}
+{% load bootstrap %}
+
+
+{% block myhacks_content %}
+    <h2>Add your hack</h2>
+    
+    <form method=POST class="form-horizontal">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <p><input type="submit" value="Add your hack!"></p>
+    </form>
+
+
+{% endblock myhacks_content %}
