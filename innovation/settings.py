@@ -71,7 +71,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Allauth options
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/accounts/login'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
@@ -80,7 +80,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = '[NHS Innovation Portal] '
 ACCOUNT_EMAIL_VERIFICATION = True
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
-ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_UNIQUE_EMAIL = False
 ACCOUNT_USERNAME_REQUIRED = False
 CONTACT_EMAIL = DEFAULT_FROM_EMAIL
 LOGIN_REDIRECT_URL = '/'
@@ -95,7 +95,9 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'bootstrapform',
+    'profiles',
     'uni_form',
+    'taggit',
 
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
@@ -103,7 +105,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.linkedin',
     # 'allauth.socialaccount.providers.openid',
     # 'allauth.socialaccount.providers.soundcloud',
-    # 'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.twitter',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

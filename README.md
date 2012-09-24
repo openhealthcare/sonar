@@ -10,11 +10,15 @@ Clone and install the requirements
 
 Running
 -------
-Make sure ``DEBUG=True`` is in your bash environment before running
+Make sure `DEBUG=True` is in your bash environment before running
 
     export DEBUG=True
 
+Also, make sure [sendgrid](http://sendgrid.com) is set up.  For emails in `DEBUG` use:
+
+    export EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+
 or
 
-    DEBUG=True python manage.py runserver
+    DEBUG=True EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend python manage.py runserver
 
