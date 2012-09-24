@@ -4,7 +4,8 @@ import os
 import dj_database_url
 
 
-DIRNAME = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+DIRNAME = os.path.abspath(os.path.dirname(__file__))
+print DIRNAME
 
 DEBUG = bool(os.environ.get('DEBUG', False))
 
