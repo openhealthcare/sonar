@@ -1,4 +1,6 @@
 Django==1.4.1
+django-allauth==0.8.0
+django-email-confirmation==0.2
 South==0.7.6
 dj-database-url==0.2.1
 gunicorn==0.14.6
