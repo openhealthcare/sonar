@@ -4,8 +4,11 @@ from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import FormView, UpdateView
 from django.views.generic import ListView
+from django.contrib import messages
+
 from forms import HackForm
 from models import Hack
+
 
 
 class BaseHackView(FormView):
@@ -23,6 +26,7 @@ class BaseHackView(FormView):
         obj = form.save(commit=False)
         obj.user = self.request.user
         obj.save()
+        messages.add_message(self.request, messages.INFO, 'Your Hack has been added!  Thanks!')
         return http.HttpResponseRedirect(self.get_success_url())
 
 
