@@ -13,6 +13,11 @@ Running
 Make sure ``DEBUG=True`` is in your bash environment before running
 
     export DEBUG=True
+    
+Also, make sure sendgind is set up.  For testing without emails working, use:
+
+    export SENDGRID_PASSWORD=''
+    export SENDGRID_USERNAME=''
 
 or
 
