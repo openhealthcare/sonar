@@ -7,7 +7,7 @@ class InnovationProfile(object):
     """
     def register(self, cls, admin_cls):
         # fields
-        # cls.add_to_class('role', models.ForeignKey('innovation.Role'))
+        cls.add_to_class('role', models.ForeignKey('innovation.Role'))
         cls.add_to_class('pseudonym', models.CharField(max_length=255))
         cls.add_to_class('is_pseudonymous', models.BooleanField(help_text='Use Pseudonym for comments and voting.'))
         cls.add_to_class('patient_karma', models.IntegerField())
@@ -18,10 +18,11 @@ class InnovationProfile(object):
         cls.__unicode__ = cls.get_full_name
 
         # admin
-        # admin_cls.list_display_filter += ['role']
+        admin_cls.list_display_filter += ['role']
 
         admin_cls.fieldsets[0][1]['fields'].insert(3, 'pseudonym')
         admin_cls.fieldsets[0][1]['fields'].insert(4, 'affiliation')
+        admin_cls.fieldsets[0][1]['fields'].insert(5, 'role')
         admin_cls.fieldsets[1][1]['fields'].insert(1, 'is_pseudonymous')
         admin_cls.fieldsets.append(('Karma', {
             'fields': ['patient_karma', 'clinician_karma', 'industry_karma'],
