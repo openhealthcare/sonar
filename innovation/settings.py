@@ -5,11 +5,11 @@ import dj_database_url
 
 
 DIRNAME = os.path.abspath(os.path.dirname(__file__))
-print DIRNAME
 
 DEBUG = bool(os.environ.get('DEBUG', False))
 
-DATABASES = {'default': dj_database_url.config(default='postgres://localhost/innovation')}
+# DATABASES = {'default': dj_database_url.config(default='postgres://localhost/innovation')}
+DATABASES = {'default': dj_database_url.config(default='sqlite:///%s/innovation.db' % DIRNAME)}
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -41,6 +41,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'innovation.middleware.LogException',
 )
 
 ROOT_URLCONF = 'innovation.urls'
@@ -86,13 +87,13 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.github',
-    'allauth.socialaccount.providers.linkedin',
-    'allauth.socialaccount.providers.openid',
-    'allauth.socialaccount.providers.soundcloud',
-    'allauth.socialaccount.providers.twitter',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.github',
+    # 'allauth.socialaccount.providers.linkedin',
+    # 'allauth.socialaccount.providers.openid',
+    # 'allauth.socialaccount.providers.soundcloud',
+    # 'allauth.socialaccount.providers.twitter',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -110,18 +111,34 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'verbose': {
+            'format': ('[%(asctime)s] %(levelname)s %(message)s '
+                       '(%(filename)s:%(lineno)d).'),
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        'innovation': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
         },
     }
 }
