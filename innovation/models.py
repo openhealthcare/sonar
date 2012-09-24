@@ -4,7 +4,6 @@ from profiles.models import Profile
 
 from .profile_extensions import InnovationProfile
 
-
 #plugins needed for comments and tagging
 
 class Evidence(models.Model):
