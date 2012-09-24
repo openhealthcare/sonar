@@ -26,7 +26,7 @@ USE_I18N = False  # Internationalization
 MEDIA_ROOT = os.path.join(DIRNAME, 'client_media')
 MEDIA_URL = 'client_media'
 STATIC_ROOT = os.path.join(DIRNAME, 'static_media')
-STATIC_URL = '/static/'
+STATIC_URL = '/static_media'
 
 TEMPLATE_DEBUG = DEBUG
 TEMPLATE_DIRS = (os.path.join(DIRNAME, 'templates'))
