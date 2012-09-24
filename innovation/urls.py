@@ -9,6 +9,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url('^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url('^about$', TemplateView.as_view(template_name='about.html'), name='about'),
+    url('^contact$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url(r'^accounts/', include('allauth.urls')),
     # Examples:
     # url(r'^$', 'innovation.views.home', name='home'),
@@ -16,6 +18,11 @@ urlpatterns = patterns('',
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    
+    # myhacks
+    url(r'^myhacks/', include('myhacks.urls', namespace='myhacks')),
+    
+    
 )
 
 urlpatterns += patterns('',

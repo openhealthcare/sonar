@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load account %}
+
+{% block content %}
+<h1>Contact details and stuff</h1>
+
+{% if request.user.is_authenticated %}
+    Welcome {% user_display request.user %} !!!
+{% endif %}
+
+
+
+{% endblock content %}
