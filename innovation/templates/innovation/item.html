@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load account %}
+{% load markup %}
+
+{% block content %}
+<h1 id="title">{{ item.title}}</h1>
+
+<p id="summary">Suggested by <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a> on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.</p>
+
+<div id="description">
+{{ item.description|markdown }}
+</div>
+
+<ul id="tags">
+{% for tag in item.tags %}
+    <li class="tag"><a href="/tag/{{ tag }}">{{ tag }}</a></li>
+{% endfor %}
+</ul>
+{% endblock content %}
