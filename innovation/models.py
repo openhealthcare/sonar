@@ -13,7 +13,7 @@ class Item(models.Model):
     via our portal.  [these must have tags, comments]
     """
     title = models.CharField(max_length = 150, null = False, blank = False)
-    slug = models.CharField(max_length = 150, null = False, unique = False)
+    slug = models.CharField(max_length = 150, null = False, unique = True)
     created_on = models.DateTimeField(auto_now_add = True)
     created_by = models.ForeignKey(User)
     summary = models.TextField()
