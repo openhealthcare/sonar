@@ -103,7 +103,7 @@ INSTALLED_APPS = (
     # 'allauth.socialaccount.providers.linkedin',
     # 'allauth.socialaccount.providers.openid',
     # 'allauth.socialaccount.providers.soundcloud',
-    # 'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.twitter',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
