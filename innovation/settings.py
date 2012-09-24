@@ -30,6 +30,7 @@ USE_I18N = False  # Internationalization
 MEDIA_ROOT = os.path.join(DIRNAME, 'client_media')
 MEDIA_URL = '/client_media/'
 STATIC_ROOT = os.path.join(DIRNAME, 'static_media')
+print STATIC_ROOT
 STATIC_URL = '/static/'
 
 TEMPLATE_DEBUG = DEBUG
@@ -101,6 +102,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+
+    'innovation'
     'south',
 )
 
