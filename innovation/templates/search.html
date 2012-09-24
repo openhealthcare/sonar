@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load account %}
+{% load i18n %}
+
+{% block content %}
+<form>
+ <input type="text" name="term" value="{{term}}">
+ <button class="btn btn-primary" type="submit">{% trans "Already Innovated?" %}</button>
+</form>
+
+
+{% if innovated %}
+<h3>Results</h3>
+{% for inn in innovats %}
+  <p>
+   <a href="">inn.title</a>
+  </p>
+{% endfor %}
+{% else %}
+Sorry, what?
+{% endif %}
+
+{% endblock content%}
