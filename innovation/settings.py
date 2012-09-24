@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'innovation'
+    'south',
 )
 
 LOGGING = {
