@@ -16,6 +16,13 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+if settings.DEBUG:
+    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+    EMAIL_HOST= 'smtp.sendgrid.net'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+
 
 # DEFAULT_FROM_EMAIL is for email confirmation from the Django allauth module
 DEFAULT_FROM_EMAIL = 'do-not-reply@innovation_r_us.nhs.gov.uk'
