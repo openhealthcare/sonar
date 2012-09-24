@@ -7,6 +7,9 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+# DEFAULT_FROM_EMAIL is for email confirmation from the Django allauth module
+DEFAULT_FROM_EMAIL = 'do-not-reply@innovation_r_us.nhs.gov.uk'
+
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -24,7 +27,7 @@ DATABASES = {
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'UTC'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -77,6 +80,38 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'allauth.account.context_processors.account',
+    'allauth.socialaccount.context_processors.socialaccount',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Allauth options
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/accounts/login'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '[NHS Innovation Portal] '
+ACCOUNT_EMAIL_VERIFICATION = True
+ACCOUNT_PASSWORD_MIN_LENGTH = 8
+ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+CONTACT_EMAIL = DEFAULT_FROM_EMAIL
+LOGIN_REDIRECT_URL = '/'
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'z(pw08&amp;o@5@!9gr_ni#g@v8u!mv61(8u=5$74b2-p(@+095oo='
 
@@ -109,6 +144,16 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.openid',
+    'allauth.socialaccount.providers.soundcloud',
+    'allauth.socialaccount.providers.twitter',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
