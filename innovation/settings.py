@@ -36,7 +36,7 @@ USE_I18N = False  # Internationalization
 
 MEDIA_ROOT = os.path.join(DIRNAME, 'client_media')
 MEDIA_URL = '/client_media/'
-STATIC_ROOT = os.path.join(DIRNAME, 'static_media')
+STATIC_ROOT = os.path.join(DIRNAME, 'static')
 STATIC_URL = '/static/'
 
 TEMPLATE_DEBUG = DEBUG
@@ -95,12 +95,13 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'bootstrapform',
+    'profiles',
     'uni_form',
 
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
-    # 'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.linkedin',
     # 'allauth.socialaccount.providers.openid',
     # 'allauth.socialaccount.providers.soundcloud',
     'allauth.socialaccount.providers.twitter',
