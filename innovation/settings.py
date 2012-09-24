@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'bootstrapform',
+    'profiles',
     'uni_form',
 
     # 'allauth.socialaccount.providers.facebook',
