@@ -98,7 +98,6 @@ INSTALLED_APPS = (
     'profiles',
     'uni_form',
     'taggit',
-
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',

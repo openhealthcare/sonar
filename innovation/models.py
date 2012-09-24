@@ -8,29 +8,19 @@ from .profile_extensions import InnovationProfile
 
 #plugins needed for comments and tagging
 
-class Evidence(models.Model):
-    """
-    Items can have links to evidence about how well they work. e.g. academic
-    papers
-    """
-    title = models.CharField(max_length = 150, null = False, blank = False)
-    url = models.URLField(null = False, blank = False)
-
-    def __unicode__(self):
-        return self.title
-
-
 class Item(models.Model):
     """
     Instances of this class represent a specific innovation to be disseminated
     via our portal.  [these must have tags, comments]
     """
     title = models.CharField(max_length = 150, null = False, blank = False)
-    slug = modelsCharField(max_length = 150, null = False, blank = False, 
+    slug = models.CharField(max_length = 150, null = False, blank = False)
     created_on = models.DateTimeField(auto_now_add = True)
-    created_by =  models.ForeignKey(User)
-    evidence =  models.ManyToManyField(Evidence)
-    description = models.TextField()
+    created_by = models.ForeignKey(User)
+    summary = models.TextField()
+    how_used = models.TextField()
+    benefits = models.TextField()
+    further_information = models.TextField()
     tags = TaggableManager()
 
     class Meta:
@@ -42,20 +32,6 @@ class Item(models.Model):
 
 class Role(models.Model):
     name = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return self.name
-
-
-class Specialisation(models.Model):
-    """
-    Items belong to a specialisation, e.g. Neurology or Immunology
-    """
-    name = models.CharField(max_length = 150, null = False, blank = False)
-    item =  models.ForeignKey(Item)
-
-    class Meta:
-        ordering = ['name']
 
     def __unicode__(self):
         return self.name
