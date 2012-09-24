@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     # myhacks
-    url(r'^myhacks/', include('myhacks.urls')),
+    url(r'^myhacks/', include('myhacks.urls', namespace='myhacks')),
     
     
 )
