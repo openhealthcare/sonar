@@ -21,6 +21,10 @@ urlpatterns = patterns('',
     # myhacks
     url(r'^myhacks/', include('myhacks.urls', namespace='myhacks')),
 
+    # innovation management
+    url(r'^idea/new/$', 'innovation.views.new_innovation', name='new_idea'),
+    url(r'^idea/(?P<slug>[^\.]+)/$', 'innovation.views.show_innovation'),
+
 
 )
 
