@@ -71,7 +71,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Allauth options
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
+# ACCOUNT_SIGNUP_FORM_CLASS=''
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/accounts/login'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
@@ -80,7 +82,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = '[NHS Innovation Portal] '
 ACCOUNT_EMAIL_VERIFICATION = True
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
-ACCOUNT_UNIQUE_EMAIL = False
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 CONTACT_EMAIL = DEFAULT_FROM_EMAIL
 LOGIN_REDIRECT_URL = '/'
@@ -98,8 +100,7 @@ INSTALLED_APPS = (
     'profiles',
     'uni_form',
     'taggit',
-
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.linkedin',
@@ -114,11 +115,20 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-
+    'django.contrib.admin',
+    'django.contrib.comments',
+    'django.contrib.markup',
     'innovation',
     'south',
     'myhacks',
 )
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'publish_stream'],
+        'METHOD': 'js_sdk',
+    }
+}
 
 LOGGING = {
     'version': 1,

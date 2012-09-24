@@ -3,11 +3,10 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 
-from .views import ProfileCreate
+from .views import ProfileCreate, Search
 
 
 admin.autodiscover()
-
 
 urlpatterns = patterns('',
     url('^$', TemplateView.as_view(template_name='home.html'), name='home'),
@@ -15,17 +14,18 @@ urlpatterns = patterns('',
     url('^contact$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^create-profile$', ProfileCreate.as_view(), name='profile-create'),
+    url('^search/?$', Search.as_view(template_name='search.html'), name='search'),
     # Examples:
     # url(r'^$', 'innovation.views.home', name='home'),
     # url(r'^innovation/', include('innovation.foo.urls')),
-
+    (r'^comments/', include('django.contrib.comments.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    
+
     # myhacks
     url(r'^myhacks/', include('myhacks.urls', namespace='myhacks')),
-    
-    
+
+
 )
 
 urlpatterns += patterns('',

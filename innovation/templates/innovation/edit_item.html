@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load account %}
+
+{% block content %}
+<h1>ZOMG!!!111!! Funky Ideas FTW</h1>
+
+<form id="new_idea" method="post" action="{% url 'new_idea' %}">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <div class="form-actions">
+    <button class="btn btn-primary" type="submit">{% trans "Submit" %}</button>
+    </div>
+</form>
+
+{% endblock content %}
