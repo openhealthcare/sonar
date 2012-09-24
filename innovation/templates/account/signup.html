@@ -13,7 +13,7 @@
 {% if user.is_authenticated %}
   {% include "account/snippets/already_logged_in.html" %}
 {% else %}
-  <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a> or use your social network account.{% endblocktrans %}</p>
+  <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">log in</a> or use your social network account.{% endblocktrans %}</p>
 
 <ul class="socialaccount_providers">
 {% include "socialaccount/snippets/provider_list.html" %}
