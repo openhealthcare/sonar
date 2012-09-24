@@ -7,6 +7,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ('innovation', '0002_add_role'),
+    )
+
     def forwards(self, orm):
         # Adding field 'Profile.role'
         db.add_column('profiles_profile', 'role', self.gf('django.db.models.fields.related.ForeignKey')(default=-1, to=orm['innovation.Role']), keep_default=False)
