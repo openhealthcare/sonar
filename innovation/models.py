@@ -26,6 +26,7 @@ class Item(models.Model):
     via our portal.  [these must have tags, comments]
     """
     title = models.CharField(max_length = 150, null = False, blank = False)
+    slug = modelsCharField(max_length = 150, null = False, blank = False, 
     created_on = models.DateTimeField(auto_now_add = True)
     created_by =  models.ForeignKey(User)
     evidence =  models.ManyToManyField(Evidence)
@@ -37,6 +38,13 @@ class Item(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Specialisation(models.Model):

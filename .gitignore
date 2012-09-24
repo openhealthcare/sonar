@@ -1,9 +1,11 @@
 *.log
 *.pot
 *.pyc
+*.swp
 local_settings.py
 .Python
 bin/
+build/
 include/
 lib/
 readline-6.2.2-py2.7-macosx-10.7-intel.egg/

@@ -106,16 +106,20 @@ INSTALLED_APPS = (
     # 'allauth.socialaccount.providers.openid',
     # 'allauth.socialaccount.providers.soundcloud',
     'allauth.socialaccount.providers.twitter',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.markup',
+    'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-
+    'django.contrib.comments',
+    'django.contrib.markup',
     'innovation',
     'south',
+    'myhacks',
 )
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -163,4 +167,8 @@ LOGGING = {
             'propagate': False,
         },
     }
+}
+
+SOUTH_MIGRATION_MODULES = {
+    'profiles': 'innovation.projectmigrations.profiles',
 }
