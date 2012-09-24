@@ -1,31 +1,13 @@
 {% extends "myhacks_base.html" %}
+{% load bootstrap %}
 
 
 {% block myhacks_content %}
     <h2>Add your hack</h2>
     
-    <form action="add_submit" method="POST" accept-charset="utf-8" class="form-horizontal">
-        <div class="control-group">
-            <label for="who" class="control-label">Who are you? (or <a href=#>Login with twitter or facebook</a>)</label>
-            <div class="controls"><input type="text" name="who" value="" id="who"></div>
-        </div>
-        
-        <div class="control-group">
-            <label for="what" class="control-label">What do you do?</label>
-            <div class="controls"><input type="text" name="what" value="" id="what"></div>
-        </div>
-
-        <div class="control-group">
-            <label for="where" class="control-label">Where are you?</label>
-            <div class="controls"><input type="text" name="where" value="" id="where"></div>
-        </div>
-
-        <div class="control-group">
-            <label for="hack" class="control-label">What's your hack?</label>
-            <div class="controls"><textarea type="text" name="hack" value="" id="hack"></textarea></div>
-        </div>
-        
-        
+    <form method=POST class="form-horizontal">
+        {% csrf_token %}
+        {{ form|bootstrap }}
         <p><input type="submit" value="Add your hack!"></p>
     </form>
 
