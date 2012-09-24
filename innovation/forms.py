@@ -4,3 +4,4 @@ from innovation.models import Item
 class ItemForm(ModelForm):
     class Meta:
         model = Item
+        exclude = ('slug',)
