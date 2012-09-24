@@ -16,7 +16,7 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
-if DEBUG:
+if not DEBUG:
     EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
     EMAIL_HOST= 'smtp.sendgrid.net'
     EMAIL_PORT = 587
