@@ -16,6 +16,11 @@ urlpatterns = patterns('',
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    
+    # myhacks
+    url(r'^myhacks/', include('myhacks.urls')),
+    
+    
 )
 
 import settings

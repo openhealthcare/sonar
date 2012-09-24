@@ -104,6 +104,7 @@ INSTALLED_APPS = (
 
     'innovation',
     'south',
+    'myhacks',
 )
 
 LOGGING = {
