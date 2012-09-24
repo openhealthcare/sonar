@@ -12,3 +12,5 @@ oauth2==1.5.211
 psycopg2==2.4.5
 python-openid==2.2.5
 wsgiref==0.1.2
+django-taggit
+markdown

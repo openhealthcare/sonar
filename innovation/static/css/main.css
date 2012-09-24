@@ -1,1 +1,17 @@
-/* */
+
+.socialaccount_providers {
+    list-style: none;
+}
+.socialaccount_provider {
+    margin-left: 50px;
+    padding: 8px;
+}
+
+.twitter {
+    background-image: url("../img/twitter-bird-blue-on-white.png");
+    background-color: red;
+}
+
+.linkedin {
+
+}
