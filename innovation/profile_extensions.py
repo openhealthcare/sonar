@@ -22,6 +22,7 @@ class InnovationProfile(object):
 
         admin_cls.fieldsets[0][1]['fields'].insert(3, 'pseudonym')
         admin_cls.fieldsets[0][1]['fields'].insert(4, 'affiliation')
+        admin_cls.fieldsets[0][1]['fields'].insert(5, 'role')
         admin_cls.fieldsets[1][1]['fields'].insert(1, 'is_pseudonymous')
         admin_cls.fieldsets.append(('Karma', {
             'fields': ['patient_karma', 'clinician_karma', 'industry_karma'],
