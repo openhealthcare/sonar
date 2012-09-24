@@ -39,6 +39,13 @@ class Item(models.Model):
         return self.title
 
 
+class Role(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Specialisation(models.Model):
     """
     Items belong to a specialisation, e.g. Neurology or Immunology
