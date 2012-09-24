@@ -9,7 +9,7 @@ class Search(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Search, self).get_context_data(**kwargs)
         context['term'] = term = self.request.GET.get('term', 'FTW')
-        innovats = Item.objects.filter(summary__contains=term)
+        innovats = Item.objects.filter(summary__icontains=term)
         context['innovats'] = innovats
         if len(innovats) > 0:
             innovated = True
