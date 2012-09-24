@@ -3,6 +3,7 @@ from django import http
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import FormView, UpdateView
+from django.views.generic import ListView
 from forms import HackForm
 from models import Hack
 
@@ -41,3 +42,7 @@ class EditView(UpdateView, BaseHackView):
         return get_object_or_404(self.model,
                                  user=self.request.user,
                                  pk=self.kwargs['pk'])
+
+
+class HackListView(ListView):
+    model = Hack

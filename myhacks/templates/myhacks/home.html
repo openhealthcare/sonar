@@ -13,7 +13,9 @@ This could be anything from redesigning a form to make it easier to fill out
 all the way up to redesigning the way your department works. Anything you think
 others might be interested in knowing about.
 
-<a href="{% url myhacks:add %}" class="btn btn-primary">Add your hack</a>
+
+<a href="{% url myhacks:add %}" class="btn btn-primary">Add your hack{% if not request.user.is_authenticated %} (Login Required ){% endif %}</a>
+
 
 {% endfilter %}
 
