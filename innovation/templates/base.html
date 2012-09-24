@@ -59,8 +59,8 @@
                   <li><a href="{% url 'account_email' %}">Profile</a></li>
                   <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
                   {% else %}
-                  <li><a class="btn" href="{% url 'account_login' %}">Log In</a></li>
-                  <li><a class="btn" href="{% url 'account_signup' %}">Sign Up</a></li>
+                  <li><a href="{% url 'account_login' %}">Log In</a></li>
+                  <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
                   {% endif %}
                 </ul>
               </li>
