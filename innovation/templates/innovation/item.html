@@ -3,58 +3,77 @@
 {% load markup %}
 {% load comments %}
 {% load votes %}
+{% load avatars %}
 
 
 {% block title %}{{item.title}}{% endblock %}
 
 {% block content %}
-    <h1 id="title">{{ item.title }}</h1>
-    <p id="summary">
-        Suggested by <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a> on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.</p>
-    {% if user.is_authenticated %}
-        <a href="{{ item.get_edit_url }}" class="btn btn-primary">Edit</a>
-        <a href="/vote/item/{{item.id}}" class="btn btn-info">Vote</a>
-    {% endif %}
+  <div class="row">
+    <div class="span8">
+      <h1 id="title">{{ item.title }}</h1>
+      <p>
+        Created on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.
+      </p>
+        {% if user.is_authenticated %}
+          <a href="{{ item.get_edit_url }}" class="btn btn-primary">Edit</a>
+        {% endif %}
 
-    <div>There have been {% vote_count 'item' item.id %} votes on this item
-    <hr/>
+        <div>
+          <hr/>
 
-    <div id="summary" class="lead">
-        {{ item.summary|markdown }}
-    </div>
+          <div id="summary" class="lead">
+            {{ item.summary|markdown }}
+          </div>
 
-    <h2>How it was used</h2>
-    <div id="usecase">
-        {{ item.how_used|markdown }}
-    </div>
+          <h2>How it was used</h2>
+          <div id="usecase">
+            {{ item.how_used|markdown }}
+          </div>
 
-    <h2>Benefits and evidence</h2>
-    <div id="benefits">
-        {{ item.benefits|markdown }}
-    </div>
+          <h2>Benefits and evidence</h2>
+          <div id="benefits">
+            {{ item.benefits|markdown }}
+          </div>
 
-    <h2>Further Information</h2>
-    <div id="further-info">
-        {{ item.further_information|markdown }}
-    </div>
-    <hr/>
-    Tagged with:
-    {% for tag in tags %}
-        <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
-    {% endfor %}
+          <h2>Further Information</h2>
+          <div id="further-info">
+            {{ item.further_information|markdown }}
+          </div>
+          <hr/>
+          Tagged with:
+          {% for tag in tags %}
+            <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
+          {% endfor %}
 
-    <div class="comments">
-        <h3>Comments and issues</h3>
-        {% get_comment_form for item as form %}
-          <form action="{% comment_form_target %}" method="post">
-            <input type="hidden" name="next" value="{% url idea item.slug %}" />
-            {% csrf_token %}
-            {{ form }}
-            <div class="control-group">
-              <div class="controls">
-                <input type="submit" name="submit" value="Post">
-                <input type="submit" name="preview" value="Preview">
+          <div class="comments">
+            <h3>Comments and issues</h3>
+            {% get_comment_form for item as form %}
+            <form action="{% comment_form_target %}" method="post">
+              <input type="hidden" name="next" value="{% url idea item.slug %}" />
+              {% csrf_token %}
+              {{ form }}
+              <div class="control-group">
+                <div class="controls">
+                  <input type="submit" name="submit" value="Post">
+                  <input type="submit" name="preview" value="Preview">
+                </div>
               </div>
-            </div>
+          </div>
+        </div>
     </div>
+    <div class="span4">
+      <p>
+        <a href="/vote/item/{{item.id}}" class="btn btn-info">This is great!</a>
+      </p>
+
+      There have been {% vote_count 'item' item.id %} votes on this item
+    </div>
+      <p id="summary">
+        <img src="{%avatar user%}" class="img-rounded">
+        <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a>
+      </p>
+
+
+  </div> <!-- row -->
 {% endblock content %}
