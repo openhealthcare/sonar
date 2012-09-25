@@ -46,6 +46,8 @@ class Home(TemplateView):
             showoff = dict(idea=Item.objects.order_by('?').get())
         except Item.DoesNotExist:
             showoff = {'idea' : Item()}
+        except Item.MultipleObjectsReturned:
+            showoff = dict(idea=Item.objects.order_by('?')[0])
         votes = Vote.objects.filter(target_id=showoff['idea'].id, target_type='item')
         showoff['votes'] = votes
         context['showoff'] = showoff
