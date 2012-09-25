@@ -2,8 +2,13 @@
 {% load account %}
 {% load i18n %}
 {% load avatars %}#
+{% load social %}
+
 
 {% block content %}
+
+{% screen_name user %}
+
 {% include 'innovation/showoff.html' %}
 <div class="row">
   <div class="span6">
