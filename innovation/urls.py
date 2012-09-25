@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
     url(r'^create-profile$', ProfileCreate.as_view(), name='profile-create'),
     url('^search/?$', Search.as_view(template_name='search.html'), name='search'),
+
+    url('^vote/(?P<target_type>item|comment)/(?P<target_id>\d+)$','innovation.views.vote_up', name='vote'),
+
     # Examples:
     # url(r'^$', 'innovation.views.home', name='home'),
     # url(r'^innovation/', include('innovation.foo.urls')),
@@ -34,6 +37,9 @@ urlpatterns = patterns('',
 
     # Tags
     url(r'^tag/(?P<tag>[^\.]+)/$', 'innovation.views.show_tagged_with'),
+
+    # User profiles
+    url(r'^user/(?P<username>[^\.]+)/$', 'innovation.views.show_user_profile'),
 )
 
 urlpatterns += patterns('',

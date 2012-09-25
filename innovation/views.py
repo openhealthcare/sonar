@@ -132,3 +132,29 @@ def show_tagged_with(request, tag):
     items = Item.objects.filter(tags__name__in=[tag])
     return render_to_response('innovation/tagged.html',
         {'items': items, 'tag': tag}, RequestContext(request))
+
+@login_required
+def vote_up(request, target_type, target_id):
+    import json
+    from .models import Vote
+
+    if not Vote.objects.filter(target_type=target_type,
+                           created_by=request.user,
+                           target_id=target_id).count():
+        v = Vote(target_type=target_type,
+                 target_id=target_id,
+                 created_by=request.user)
+        v.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', "/"))
+
+
+def show_user_profile(request, username):
+    """
+    Given a username, displays a page full of information about them.
+    """
+    user = User.objects.get(username=username)
+    if not user:
+        return HttpResponseNotFound()
+    return render_to_response('innovation/user_profile.html',
+        {'user': user}, RequestContext(request))
