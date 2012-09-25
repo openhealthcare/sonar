@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load innovative_tags %}
 in account base....
 
 {% load url from future %}
@@ -10,6 +10,9 @@ in account base....
 <h1>{% trans 'My Account' %}</h1>
 
 <ul class="nav nav-tabs">
+  <li class="{% block account_nav_edit %}{% endblock %}">
+    <a href="{% url 'edit_profile' %}">Edit details</a>
+  </li>
   <li class="{% block account_nav_email %}{% endblock %}">
     <a href="{% url 'account_email' %}">{% trans 'E-mail Addresses' %}</a>
   </li>
@@ -23,6 +26,7 @@ in account base....
   </li>
   {% endif %}
 </ul>
+
 {% block account_content %}
 {% endblock %}
 

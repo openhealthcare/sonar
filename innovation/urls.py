@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     url('^contact$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url('^accounts/signup/$', SignUp.as_view(), name='account_signup'),
     url('^accounts/signup/profile/$', CompleteProfile.as_view(), name='complete_profile'),
+
+    url(r'^accounts/edit', 'innovation.views.edit_profile', name='edit_profile'),
     url(r'^accounts/', include('allauth.urls')),
     url('^search/?$', Search.as_view(template_name='search.html'), name='search'),
 
