@@ -37,13 +37,13 @@ class Item(models.Model):
         return ('idea', (), {
         'slug': self.slug
         })
-    
+
     @models.permalink
     def get_edit_url(self):
         return ('edit_idea', (), {
             'slug' : self.slug,
         })
-    
+
 
 class Role(models.Model):
     name = models.CharField(max_length=255)

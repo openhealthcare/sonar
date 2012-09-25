@@ -6,16 +6,32 @@
 {% block title %}{{user.username}}{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="span1"><img src="{% avatar user %}" class="img-rounded"/></div>
-    <div class="span11">
-        <h1>{{ user.username }}</h1>
-        <p></p>
+<div class="vcard">
+    <div class="row">
+        <div class="span1"><img src="{% avatar user %}" class="img-rounded photo"/></div>
+        <div class="span11">
+            <h1 class="fn">{{ user.profile.name }}</h1>
+            <p>
+                <strong>
+                <span class="role">{{ user.profile.role }}</span>,
+                <span class="org">{{ user.profile.affiliation }}</span>
+                </strong>
+            </p>
+            <p>
+                <i class="icon-envelope"></i><span class="email">{{ user.email }}</span>
+                {% if user.profile.website %}
+                <i class="icon-home"></i><span class="url">{{ user.profile.website }}</span>
+                {% endif %}
+                {% if user.profile.phone_number %}
+                <i class="icon-bell"></i><span class="tel">{{ user.profile.phone_number }}</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12 note">
+        {{ user.profile.bio|markdown }}
+        </div>
     </div>
 </div>
-affiliation
-phone number
-email
-bio
-
 {% endblock %}
