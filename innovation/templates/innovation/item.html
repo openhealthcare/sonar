@@ -52,7 +52,7 @@
       There have been {% vote_count 'item' item.id %} votes on this item
     </div>
       <p id="summary">
-        <img src="{%avatar user%}" class="img-rounded">
+        <img src="{% avatar item.created_by %}" class="img-rounded">
         <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a>
       </p>
       <p>
