@@ -42,7 +42,10 @@ class Home(TemplateView):
 
     def get_context_data(self,**kw):
         context = super(Home, self).get_context_data(**kw)
-        showoff = dict(idea=Item.objects.order_by('?')[0])
+        try:
+            showoff = dict(idea=Item.objects.order_by('?').get())
+        except Item.DoesNotExist:
+            showoff = {'idea' : Item()}
         votes = Vote.objects.filter(target_id=showoff['idea'].id, target_type='item')
         showoff['votes'] = votes
         context['showoff'] = showoff
