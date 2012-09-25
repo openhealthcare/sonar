@@ -57,7 +57,7 @@ def new_innovation(request):
             item = Item.objects.create(title=title, slug=slug,
                 created_by=created_by, summary=summary, how_used=how_used,
                 benefits=benefits, further_information=further_information)
-            tags = form.cleaned_data['tags']
+            tags = [t.lower() for t in form.cleaned_data['tags']]
             item.tags.add(*tags)
             messages.info(request, "Success. You have created a new innovation")
             return HttpResponseRedirect('/idea/%s' % item.slug)
@@ -96,7 +96,7 @@ def edit_innovation(request, slug):
             item.benefits = form.cleaned_data['benefits']
             item.further_information = form.cleaned_data['further_information']
             item.save()
-            tags = form.cleaned_data['tags']
+            tags = [t.lower() for t in form.cleaned_data['tags']]
             item.tags.add(*tags)
             messages.info(request, "Success. You have updated your innovation.")
             return HttpResponseRedirect('/idea/%s' % item.slug)
@@ -107,3 +107,12 @@ def edit_innovation(request, slug):
     context['title'] = 'Edit %s' % item.title
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
+
+def show_tagged_with(request, tag):
+    """
+    Given a tag will display a list of all innovations tagged with it.
+    """
+    tag = tag.lower()
+    items = Item.objects.filter(tags__name__in=[tag])
+    return render_to_response('innovation/tagged.html',
+        {'items': items, 'tag': tag}, RequestContext(request))

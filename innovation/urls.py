@@ -31,6 +31,9 @@ urlpatterns = patterns('',
 
     # Filebrowser
     (r'^admin/filebrowser/', include('filebrowser.urls')),
+
+    # Tags
+    url(r'^tag/(?P<tag>[^\.]+)/$', 'innovation.views.show_tagged_with'),
 )
 
 urlpatterns += patterns('',
