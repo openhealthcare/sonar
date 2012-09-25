@@ -5,6 +5,8 @@ from profiles.models import Profile
 
 from .profile_extensions import InnovationProfile
 
+from filebrowser.fields import FileBrowseField
+
 #plugins needed for comments and tagging
 
 class Item(models.Model):
@@ -21,6 +23,8 @@ class Item(models.Model):
     benefits = models.TextField()
     further_information = models.TextField()
     tags = TaggableManager()
+    hero_image = FileBrowseField(max_length=200, format='image',
+                                                    blank=True, null=True,)
 
     class Meta:
         ordering = ['-created_on']

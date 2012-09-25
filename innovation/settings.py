@@ -38,6 +38,7 @@ MEDIA_ROOT = os.path.join(DIRNAME, 'client_media')
 MEDIA_URL = '/client_media/'
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
 STATIC_URL = '/static/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + "/admin/"
 
 TEMPLATE_DEBUG = DEBUG
 TEMPLATE_DIRS = (os.path.join(DIRNAME, 'templates'))
@@ -100,6 +101,7 @@ INSTALLED_APPS = [
     'profiles',
     'uni_form',
     'taggit',
+    'filebrowser',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.linkedin',
