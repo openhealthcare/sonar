@@ -10,6 +10,12 @@ class ItemForm(forms.ModelForm):
         exclude = ('slug', 'created_by')
 
 
+class EditItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        exclude = ('slug', 'created_by', 'title')
+
+
 class SocialRegisterForm(forms.ModelForm):
     class Meta:
         fields = ('email', 'first_name', 'last_name', 'pseudonym', 'affiliation')
