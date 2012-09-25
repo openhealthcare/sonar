@@ -20,7 +20,7 @@
             <p>
                 <i class="icon-envelope"></i><span class="email">{{ user.email }}</span>
                 {% if user.profile.website %}
-                <i class="icon-home"></i><span class="url">{{ user.profile.website }}</span>
+                <i class="icon-home"></i><a href="{{ user.profile.website }}" class="url">{{ user.profile.website }}</a>
                 {% endif %}
                 {% if user.profile.phone_number %}
                 <i class="icon-bell"></i><span class="tel">{{ user.profile.phone_number }}</span>
