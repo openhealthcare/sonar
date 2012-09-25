@@ -13,6 +13,7 @@ class InnovationProfile(object):
         cls.add_to_class('industry_karma', models.IntegerField())
         cls.add_to_class('affiliation', models.CharField(max_length=255))
         cls.add_to_class('phone_number', models.CharField(max_length=50))
+        cls.add_to_class('bio', models.TextField())
 
         cls.__unicode__ = cls.get_full_name
 
@@ -22,6 +23,7 @@ class InnovationProfile(object):
         admin_cls.fieldsets[0][1]['fields'].insert(3, 'affiliation')
         admin_cls.fieldsets[0][1]['fields'].insert(4, 'role')
         admin_cls.fieldsets[0][1]['fields'].insert(5, 'phone_number')
+        admin_cls.fieldsets[1][1]['fields'].insert(3, 'bio')
         admin_cls.fieldsets.append(('Karma', {
             'fields': ['patient_karma', 'clinician_karma', 'industry_karma'],
             'classes': ['collapse'],
