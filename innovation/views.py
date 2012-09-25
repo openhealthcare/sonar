@@ -1,11 +1,5 @@
-from allauth.account import signals
-from allauth.account.forms import SignupForm
-from allauth.account.models import EmailAddress
-from allauth.account.utils import send_email_confirmation, user_display
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.template import RequestContext
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -17,13 +11,16 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, TemplateView, UpdateView
 
-from .forms import CompleteProfileForm, ItemForm, EditItemForm
+from allauth.account import signals
+from allauth.account.forms import SignupForm
+from allauth.account.models import EmailAddress
+from allauth.account.utils import send_email_confirmation, user_display
+
+from .forms import CompleteProfileForm, ItemForm, EditItemForm, HeroImageForm
 from .models import Item, Profile, Vote
 from django.views.generic import CreateView, TemplateView, UpdateView
-from profiles.models import Profile
 
-from forms import RegisterForm, SocialRegisterForm, ItemForm, EditItemForm, HeroImageForm
-from innovation.models import Item, Vote
+from profiles.models import Profile
 
 
 class CompleteProfile(CreateView):

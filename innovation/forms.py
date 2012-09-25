@@ -39,14 +39,3 @@ class HeroImageForm(forms.ModelForm):
         path = default_storage.save('uploads/%s' % data.name,
                                                     ContentFile(data.read()))
         return path
-
-
-class SocialRegisterForm(forms.ModelForm):
-    class Meta:
-        fields = ('email', 'first_name', 'last_name', 'pseudonym', 'affiliation')
-        model = Profile
-
-
-class RegisterForm(SocialRegisterForm):
-    class Meta(SocialRegisterForm.Meta):
-        exclude = ('email',)

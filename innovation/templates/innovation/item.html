@@ -21,12 +21,12 @@
           <a href="{{ item.get_edit_url }}" class="btn btn-primary">Edit</a>
         {% endif %}
 
-    
     {% if item.hero_image %}
         <img src="{% version item.hero_image 'thumbnail' %}" class="img-rounded" />
     {% else %}
         <img>PLACEHOLDER IMAGE
     {% endif %}
+
     {% if item.created_by == request.user %}
     <form method=post class=hero_image_upload enctype=multipart/form-data>
         {% csrf_token %}
@@ -34,6 +34,7 @@
         <input type="submit" name="" value="Upload" id="">
     </form>
     {% endif %}
+
     <div id="summary" class="lead">
         {{ item.summary|markdown }}
     </div>
