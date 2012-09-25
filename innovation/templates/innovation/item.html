@@ -13,7 +13,7 @@
   <div class="row">
     <div class="span8">
       <h1 id="title">{{ item.title }}</h1>
-      
+
       {# <img src="{%if showoff.idea.hero_image%}<img src="{% version showoff.idea.hero_image 'thumbnail' %}" class="img-rounded" />{%else%}{{STATIC_URL}}img/placeholder-innov-image.png{%endif%}" class="" alt="NO IMAGE!" /> #}
       {% if item.hero_image %}
           <img src="{% version item.hero_image 'item_banner' %}" class="img-rounded" />
@@ -28,8 +28,8 @@
           <input type="submit" name="" value="Upload" id="">
       </form>
       {% endif %}
-      
-      
+
+
       <p>
         Created on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.
       </p>
@@ -77,7 +77,7 @@
 
       There have been {% vote_count 'item' item.id %} votes on this item
       <p id="summary">
-        <img src="{%avatar user%}" class="img-rounded" style="max-width: 24px">
+        <img src="{%avatar item.created_by %}" class="img-rounded" style="max-width: 24px">
         <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a>
       </p>
       <p>
@@ -90,6 +90,16 @@
             <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
           {% endfor %}
       </p>
+
+        <section class="span2 sharebuttons">
+            <span class='st_facebook_hcount' displayText='Facebook'></span>
+            <span class='st_twitter_hcount' displayText='Tweet'></span>
+            <span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+            <span class='st_pinterest_hcount' displayText='Pinterest'></span>
+            <span class='st_email_hcount' displayText='Email'></span>
+        </section>
+
+
     </div>
   </div> <!-- row -->
   <div class="row">
@@ -127,3 +137,10 @@
   </div>
 
 {% endblock content %}
+
+
+{% block foot_js %}
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "7389331a-7a38-4637-89ed-b4e428ff395e"}); </script>
+{% endblock foot_js %}
