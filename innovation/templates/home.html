@@ -10,7 +10,9 @@
     <ul>
     {% for item in recent %}
       <li>
+        <a href="/idea/{{item.slug}}">
         {{item.title}}
+        </a>
       </li>
     {% endfor %}
     </ul>
@@ -18,7 +20,9 @@
   <div class="span4">
     {% for item in top %}
       <li>
+        <a href="/idea/{{item.slug}}">
         {{item.title}}
+        </a>
       </li>
     {% endfor %}
   </div>

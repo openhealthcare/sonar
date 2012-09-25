@@ -8,7 +8,7 @@ from django.views.generic import CreateView, TemplateView
 from profiles.models import Profile
 
 from forms import RegisterForm, SocialRegisterForm, ItemForm, EditItemForm
-from models import Item
+from innovation.models import Item, Vote
 
 
 class ProfileCreate(CreateView):

@@ -1,3 +1,5 @@
+{% load url from future %}
+
 <div class="row">
   <div class="span4">
     <img src="{%if showoff.idea.image%}{{idea.showoff.image}}{%else%}{{STATIC_URL}}img/sub2.jpg{%endif%}" class="" alt="NO IMAGE!" />
@@ -12,7 +14,7 @@
       {% for u in showoff.votes %}
         {{u.created_by}} |
       {% endfor %}
-      <a class="btn btn-danger" href="/idea/{{showoff.idea.id}}">See More</a>
+      <a class="btn btn-danger" href="/idea/{{showoff.idea.slug}}">See More</a>
     </p>
   </div>
 </div>
