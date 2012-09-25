@@ -1,16 +1,13 @@
-<<<<<<< HEAD
 from django.template.defaultfilters import slugify
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-=======
 from django.views.generic import CreateView, TemplateView
 from profiles.models import Profile
->>>>>>> f28e689d95d7ebc14e5797ab60254e982b5399e9
 
-from .forms import RegisterForm, SocialRegisterForm
-from .models import Item
+from forms import RegisterForm, SocialRegisterForm, ItemForm
+from models import Item
 
 
 class ProfileCreate(CreateView):
@@ -63,7 +60,7 @@ def new_innovation(request):
             item.tags.add(*tags)
             return HttpResponseRedirect('/idea/%s' % item.slug)
     else:
-        form = ItemForm
+        form = ItemForm()
     context['form'] = form
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
@@ -72,11 +69,7 @@ def show_innovation(request, slug):
     """
     Displays a specific innovation.
     """
-<<<<<<< HEAD
     item = Item.objects.get(slug=slug)
-    return render_to_response('innovation/item.html', {item: item},
-        RequestContext(request))
-=======
-    pass
-
->>>>>>> f28e689d95d7ebc14e5797ab60254e982b5399e9
+    tags = item.tags.all()
+    return render_to_response('innovation/item.html', {'item': item,
+        'tags': tags}, RequestContext(request))
