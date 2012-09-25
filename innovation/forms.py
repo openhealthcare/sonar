@@ -4,10 +4,15 @@ from profiles.models import Profile
 from models import Item
 
 
-class CompleteProfileForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('email', 'first_name', 'last_name', 'affiliation', 'role')
+        fields = ('username', 'email', 'first_name', 'last_name', 'affiliation', 'role')
+
+
+class CompleteProfileForm(ProfileForm):
+    class Meta(ProfileForm.Meta):
+        exclude = ('username')
 
 
 class ItemForm(forms.ModelForm):

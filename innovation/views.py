@@ -16,7 +16,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, TemplateView, UpdateView
 from profiles.models import Profile
 
-from .forms import CompleteProfileForm, ItemForm, EditItemForm, HeroImageForm
+from .forms import CompleteProfileForm, ItemForm, EditItemForm, HeroImageForm, ProfileForm
 from .models import Item, Vote
 from .utils import method_decorator
 
@@ -234,6 +234,7 @@ def vote_up(request, target_type, target_id):
 
 
 class EditProfile(AuthMixin, ProfileIncompleteMixin, UpdateView):
+    form_class = ProfileForm
     model = Profile
     success_url = reverse_lazy('edit_profile')
     template_name = 'account/edit.html'
