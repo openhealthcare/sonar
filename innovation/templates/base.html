@@ -107,13 +107,17 @@
         {% block content %}
 
         {% endblock %}
+    </div>
 
         <!-- Footer -->
         <footer>
           <hr />
+          <div class="container">
+
 
           <div class="row">
-            <div class="span4">
+
+            <div class="span6">
               <ul class="nav nav-list">
                 <li>
                   <a href="https://github.com/openhealthcare/innovations_r_us">The NHSonar source codes...</a>
@@ -127,13 +131,7 @@
               </ul>
 
             </div>
-            <div class="span4">
-              <h4>Recent Feeds</h4>
-              <a class="twitter-timeline" href="https://twitter.com/search?q=%23nhshd" data-widget-id="250559244682805250">Tweets about "#nhshd"</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-            </div>
-            <div class="span4">
+            <div class="span6">
               <h4>Recent Activity</h4>
               <ul class="nav nav-list">
                 {% for item in recent %}
@@ -145,9 +143,12 @@
             </div>
 
           </div>
+
           <p>&copy; NHS - the content on this website is licensed under a <a href="http://creativecommons.org/licenses/by/2.0/uk/">Creative Commons license</a></p>
+
+          </div>
+
         </footer>
 
-    </div>
   </body>
 </html>
