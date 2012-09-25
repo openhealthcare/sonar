@@ -1,10 +1,12 @@
 from django.db import models
 
+def _name(self):
+    return self.get_full_name() or self.username
+
 
 class InnovationProfile(object):
-    """ Profile extensions for Innovation project
+    """ Profile extensions for Innovation project """
 
-    """
     def register(self, cls, admin_cls):
         # fields
         cls.add_to_class('role', models.ForeignKey('innovation.Role'))
@@ -14,6 +16,8 @@ class InnovationProfile(object):
         cls.add_to_class('affiliation', models.CharField(max_length=255))
         cls.add_to_class('phone_number', models.CharField(max_length=50))
         cls.add_to_class('bio', models.TextField(null=True, blank=True))
+
+        cls.add_to_class('name', property(_name))
 
         cls.__unicode__ = cls.get_full_name
 
