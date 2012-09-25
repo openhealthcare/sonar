@@ -4,6 +4,8 @@ from allauth.account.models import EmailAddress
 from allauth.account.utils import send_email_confirmation, user_display
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.template import RequestContext
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User

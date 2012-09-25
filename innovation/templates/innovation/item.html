@@ -41,11 +41,6 @@
             {{ item.further_information|markdown }}
           </div>
           <hr/>
-          Tagged with:
-          {% for tag in tags %}
-            <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
-          {% endfor %}
-
 
         </div>
     </div>
@@ -57,7 +52,7 @@
       There have been {% vote_count 'item' item.id %} votes on this item
     </div>
       <p id="summary">
-        <img src="{%avatar user%}" class="img-rounded">
+        <img src="{% avatar item.created_by %}" class="img-rounded">
         <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a>
       </p>
       <p>
@@ -66,14 +61,16 @@
       <hr />
       <h4>Tags</h4>
       <p>
-        {% for tag in item.tags.all %}
-          <span class="label label-info">{{tag}}</span>
-        {% endfor %}
+          Tagged with:
+          {% for tag in tags %}
+            <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
+          {% endfor %}
       </p>
   </div> <!-- row -->
   <div class="row">
     <div class="comments span12">
       <h3>Comments and issues</h3>
+      {% render_comment_list for event %}
       {% get_comment_form for item as form %}
       <form action="{% comment_form_target %}" method="post">
         <input type="hidden" name="next" value="{% url idea item.slug %}" />
