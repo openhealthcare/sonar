@@ -33,6 +33,11 @@ class CompleteProfile(CreateView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_initial(self):
+        initial = super(CompleteProfile, self).get_initial()
+        initial['email'] = self.request.user.email
+        return initial
+
 
 class SignUp(CreateView):
     form_class = SignupForm
@@ -208,6 +213,30 @@ def vote_up(request, target_type, target_id):
         v.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', "/"))
+
+
+@login_required
+def edit_profile(request):
+
+    from pdb import set_trace; set_trace()
+
+    init = None
+    if hasattr(request.user, 'profile'):
+        init = {
+            'email' : request.user.profile.email,
+            'first_name' : request.user.profile.first_name,
+            'last_name' : request.user.profile.last_name,
+            'affiliation' : request.user.profile.affiliation,
+        }
+
+    form = CompleteProfileForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            pass
+
+    return render_to_response('account/edit.html',
+        {'form': form}, RequestContext(request))
+
 
 
 def show_user_profile(request, username):
