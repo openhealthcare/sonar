@@ -27,6 +27,7 @@ urlpatterns = patterns('',
 
     # innovation management
     url(r'^idea/new/$', 'innovation.views.new_innovation', name='new_idea'),
+    url(r'^idea/edit/(?P<slug>[^\.]+)/$', 'innovation.views.edit_innovation'),
     url(r'^idea/(?P<slug>[^\.]+)/$', 'innovation.views.show_innovation'),
 
 
