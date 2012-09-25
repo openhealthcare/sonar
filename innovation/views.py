@@ -1,11 +1,43 @@
+<<<<<<< HEAD
 from django.template.defaultfilters import slugify
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+=======
+from django.views.generic import CreateView, TemplateView
+from profiles.models import Profile
+>>>>>>> f28e689d95d7ebc14e5797ab60254e982b5399e9
 
-from models import Item
-from forms import ItemForm
+from .forms import RegisterForm, SocialRegisterForm
+from .models import Item
+
+
+class ProfileCreate(CreateView):
+    form_class = SocialRegisterForm
+    model = Profile
+    template_name = 'profiles/create.html'
+
+    def get_form(self, form_class):
+        if hasattr(self.request.user, 'email') and self.request.user.email:
+            form_class = RegisterForm
+        return super(ProfileCreate, self).get_form(form_class)
+
+
+class Search(TemplateView):
+    template_name = 'search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Search, self).get_context_data(**kwargs)
+        context['term'] = term = self.request.GET.get('term', 'FTW')
+        innovats = Item.objects.filter(summary__icontains=term)
+        context['innovats'] = innovats
+        if len(innovats) > 0:
+            innovated = True
+        else:
+            innovated = False
+        context['innovated'] = innovated
+        return context
 
 
 @login_required
@@ -40,6 +72,11 @@ def show_innovation(request, slug):
     """
     Displays a specific innovation.
     """
+<<<<<<< HEAD
     item = Item.objects.get(slug=slug)
     return render_to_response('innovation/item.html', {item: item},
         RequestContext(request))
+=======
+    pass
+
+>>>>>>> f28e689d95d7ebc14e5797ab60254e982b5399e9
