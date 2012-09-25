@@ -1,3 +1,7 @@
+from allauth.account import signals
+from allauth.account.forms import SignupForm
+from allauth.account.models import EmailAddress
+from allauth.account.utils import send_email_confirmation, user_display
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
@@ -10,17 +14,24 @@ from django.template import RequestContext
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, TemplateView, UpdateView
-
-from allauth.account import signals
-from allauth.account.forms import SignupForm
-from allauth.account.models import EmailAddress
-from allauth.account.utils import send_email_confirmation, user_display
+from profiles.models import Profile
 
 from .forms import CompleteProfileForm, ItemForm, EditItemForm, HeroImageForm
-from .models import Item, Profile, Vote
-from django.views.generic import CreateView, TemplateView, UpdateView
+from .models import Item, Vote
+from .utils import method_decorator
 
-from profiles.models import Profile
+
+class AuthMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(AuthMixin, self).dispatch(request, *args, **kwargs)
+
+
+class ProfileIncompleteMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        if not hasattr(request.user, 'profile'):
+            return CompleteProfile.dispatch(CompleteProfile(), request, *args, **kwargs)
+        return super(ProfileIncompleteMixin, self).dispatch(request, *args, **kwargs)
 
 
 class CompleteProfile(CreateView):
@@ -88,7 +99,7 @@ class SignUp(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class Search(TemplateView):
+class Search(AuthMixin, ProfileIncompleteMixin, TemplateView):
     template_name = 'search.html'
 
     def get_context_data(self, **kwargs):
@@ -122,6 +133,7 @@ class Home(TemplateView):
 
         return context
 
+# TODO: CBV & add ProfileIncompleteMixin
 @login_required
 def new_innovation(request):
     """
@@ -153,7 +165,7 @@ def new_innovation(request):
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
 
-class ShowInnovation(UpdateView):
+class ShowInnovation(AuthMixin, ProfileIncompleteMixin, UpdateView):
     model = Item
     template_name = 'innovation/item.html'
     form_class = HeroImageForm
@@ -163,6 +175,7 @@ class ShowInnovation(UpdateView):
         context['tags'] = self.object.tags.all()
         return context
 
+# TODO: CBV & add ProfileIncompleteMixin
 @login_required
 def edit_innovation(request, slug):
     """
@@ -193,6 +206,7 @@ def edit_innovation(request, slug):
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
 
+# TODO: CBV & add ProfileIncompleteMixin
 def show_tagged_with(request, tag):
     """
     Given a tag will display a list of all innovations tagged with it.
@@ -202,6 +216,7 @@ def show_tagged_with(request, tag):
     return render_to_response('innovation/tagged.html',
         {'items': items, 'tag': tag}, RequestContext(request))
 
+# TODO: CBV & add ProfileIncompleteMixin
 @login_required
 def vote_up(request, target_type, target_id):
     import json
@@ -218,7 +233,7 @@ def vote_up(request, target_type, target_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', "/"))
 
 
-class EditProfile(UpdateView):
+class EditProfile(AuthMixin, ProfileIncompleteMixin, UpdateView):
     model = Profile
     success_url = reverse_lazy('edit_profile')
     template_name = 'account/edit.html'
