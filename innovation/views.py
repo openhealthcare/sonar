@@ -234,6 +234,7 @@ def vote_up(request, target_type, target_id):
 
 
 class EditProfile(AuthMixin, ProfileIncompleteMixin, UpdateView):
+    form_class = CompleteProfileForm
     model = Profile
     success_url = reverse_lazy('edit_profile')
     template_name = 'account/edit.html'
