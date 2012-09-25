@@ -4,6 +4,7 @@
 {% load comments %}
 {% load votes %}
 {% load avatars %}
+{% load fb_versions %}
 
 
 {% block title %}{{item.title}}{% endblock %}
@@ -12,13 +13,32 @@
   <div class="row">
     <div class="span8">
       <h1 id="title">{{ item.title }}</h1>
-      <img src="{%if showoff.idea.image%}{{idea.showoff.image}}{%else%}{{STATIC_URL}}img/placeholder-innov-image.png{%endif%}" class="" alt="NO IMAGE!" />
+      <img src="{%if showoff.idea.hero_image%}<img src="{% version showoff.idea.hero_image 'thumbnail' %}" class="img-rounded" />{%else%}{{STATIC_URL}}img/placeholder-innov-image.png{%endif%}" class="" alt="NO IMAGE!" />
       <p>
         Created on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.
       </p>
         {% if user.is_authenticated %}
           <a href="{{ item.get_edit_url }}" class="btn btn-primary">Edit</a>
         {% endif %}
+
+    {% if item.hero_image %}
+        <img src="{% version item.hero_image 'thumbnail' %}" class="img-rounded" />
+    {% else %}
+        <img>PLACEHOLDER IMAGE
+    {% endif %}
+
+    {% if item.created_by == request.user %}
+    <form method=post class=hero_image_upload enctype=multipart/form-data>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" name="" value="Upload" id="">
+    </form>
+    {% endif %}
+
+    <div id="summary" class="lead">
+        {{ item.summary|markdown }}
+    </div>
+
 
         <div>
           <hr/>
@@ -53,9 +73,8 @@
       </p>
 
       There have been {% vote_count 'item' item.id %} votes on this item
-    </div>
       <p id="summary">
-        <img src="{% avatar item.created_by %}" class="img-rounded">
+        <img src="{%avatar user%}" class="img-rounded" style="max-width: 24px">
         <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a>
       </p>
       <p>
@@ -64,16 +83,32 @@
       <hr />
       <h4>Tags</h4>
       <p>
-          Tagged with:
           {% for tag in tags %}
             <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
           {% endfor %}
       </p>
+    </div>
   </div> <!-- row -->
   <div class="row">
     <div class="comments span12">
-      <h3>Comments and issues</h3>
-      {% render_comment_list for item %}
+      <h3>Comments</h3>
+
+      {% get_comment_list for item as comments %}
+      {% for comment in comments %}
+      <blockquote>
+        {{ comment.comment|markdown }}
+        <small>
+        {% if comment.user_url %}
+            <a href="comment.user_url">{{ comment.user_name }}</a>
+        {% elif comment.user %}
+            <img src="{% avatar comment.user %}" class="img-rounded" style="max-width: 20px"/> <a href="/user/{{ comment.user.username }}/">{{ comment.user.username }}</a>
+        {% endif %}
+        {{ comment.submit_date|date:"D d M Y H:m" }}</span>.
+        </small>
+      </blockquote>
+      {% endfor %}
+
+      <p>Use the form below to leave a comment on this innovation:</p>
       {% get_comment_form for item as form %}
       <form action="{% comment_form_target %}" method="post">
         <input type="hidden" name="next" value="{% url idea item.slug %}" />

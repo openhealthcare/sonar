@@ -4,10 +4,10 @@
 {% load avatars %}#
 {% load social %}
 
-
+{% block title %}Welcome{% endblock %}
 {% block content %}
 
-{% screen_name user %}
+<h1>Hello there, {% screen_name user %}</h1>
 
 {% include 'innovation/showoff.html' %}
 <div class="row">
