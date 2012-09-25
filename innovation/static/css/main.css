@@ -18,6 +18,7 @@ body {padding-top:0;}
 h1, h2, h3, h4, h5{
     font-family: 'Righteous', cursive;
 }
+
 /* .navbar-inner{ */
 /*     background-image:url('../img/header-wide.png'); */
 /*     background-repeat:repeat-x; */
@@ -38,4 +39,8 @@ footer{
 
 footer .row{
     padding-top:75px;
+
+.sharebuttons span {
+    margin-bottom:0.2em;
+>>>>>>> Share links
 }
