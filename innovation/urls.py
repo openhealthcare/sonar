@@ -34,6 +34,9 @@ urlpatterns = patterns('',
 
     # Tags
     url(r'^tag/(?P<tag>[^\.]+)/$', 'innovation.views.show_tagged_with'),
+
+    # User profiles
+    url(r'^user/(?P<username>[^\.]+)/$', 'innovation.views.show_user_profile'),
 )
 
 urlpatterns += patterns('',
