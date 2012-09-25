@@ -7,7 +7,7 @@ from models import Item
 class CompleteProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('email', 'first_name', 'last_name', 'pseudonym', 'affiliation')
+        fields = ('email', 'first_name', 'last_name', 'affiliation')
 
 
 class ItemForm(forms.ModelForm):
