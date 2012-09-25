@@ -41,11 +41,6 @@
             {{ item.further_information|markdown }}
           </div>
           <hr/>
-          Tagged with:
-          {% for tag in tags %}
-            <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
-          {% endfor %}
-
 
         </div>
     </div>
@@ -66,9 +61,10 @@
       <hr />
       <h4>Tags</h4>
       <p>
-        {% for tag in item.tags.all %}
-          <span class="label label-info">{{tag}}</span>
-        {% endfor %}
+          Tagged with:
+          {% for tag in tags %}
+            <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
+          {% endfor %}
       </p>
   </div> <!-- row -->
   <div class="row">
