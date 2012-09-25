@@ -4,6 +4,7 @@
 {% load comments %}
 {% load votes %}
 {% load avatars %}
+{% load fb_versions %}
 
 
 {% block title %}{{item.title}}{% endblock %}
@@ -12,13 +13,35 @@
   <div class="row">
     <div class="span8">
       <h1 id="title">{{ item.title }}</h1>
-      <img src="{%if showoff.idea.image%}{{idea.showoff.image}}{%else%}{{STATIC_URL}}img/placeholder-innov-image.png{%endif%}" class="" alt="NO IMAGE!" />
+      
+      {# <img src="{%if showoff.idea.hero_image%}<img src="{% version showoff.idea.hero_image 'thumbnail' %}" class="img-rounded" />{%else%}{{STATIC_URL}}img/placeholder-innov-image.png{%endif%}" class="" alt="NO IMAGE!" /> #}
+      {% if item.hero_image %}
+          <img src="{% version item.hero_image 'item_banner' %}" class="img-rounded" />
+      {% else %}
+          <img src="{{STATIC_URL}}img/placeholder-innov-image.png">
+      {% endif %}
+
+      {% if item.created_by == request.user %}
+      <form method=post class=hero_image_upload enctype=multipart/form-data>
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" name="" value="Upload" id="">
+      </form>
+      {% endif %}
+      
+      
       <p>
         Created on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.
       </p>
         {% if user.is_authenticated %}
           <a href="{{ item.get_edit_url }}" class="btn btn-primary">Edit</a>
         {% endif %}
+
+
+    <div id="summary" class="lead">
+        {{ item.summary|markdown }}
+    </div>
+
 
         <div>
           <hr/>

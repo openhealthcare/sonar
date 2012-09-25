@@ -1,11 +1,5 @@
-from allauth.account import signals
-from allauth.account.forms import SignupForm
-from allauth.account.models import EmailAddress
-from allauth.account.utils import send_email_confirmation, user_display
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.template import RequestContext
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -17,8 +11,16 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, TemplateView, UpdateView
 
-from .forms import CompleteProfileForm, ItemForm, EditItemForm
+from allauth.account import signals
+from allauth.account.forms import SignupForm
+from allauth.account.models import EmailAddress
+from allauth.account.utils import send_email_confirmation, user_display
+
+from .forms import CompleteProfileForm, ItemForm, EditItemForm, HeroImageForm
 from .models import Item, Profile, Vote
+from django.views.generic import CreateView, TemplateView, UpdateView
+
+from profiles.models import Profile
 
 
 class CompleteProfile(CreateView):
@@ -151,14 +153,15 @@ def new_innovation(request):
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
 
-def show_innovation(request, slug):
-    """
-    Displays a specific innovation.
-    """
-    item = Item.objects.get(slug=slug)
-    tags = item.tags.all()
-    return render_to_response('innovation/item.html', {'item': item,
-        'tags': tags}, RequestContext(request))
+class ShowInnovation(UpdateView):
+    model = Item
+    template_name = 'innovation/item.html'
+    form_class = HeroImageForm
+    
+    def get_context_data(self, **kwargs):
+        context = super(ShowInnovation, self).get_context_data(**kwargs)
+        context['tags'] = self.object.tags.all()
+        return context
 
 @login_required
 def edit_innovation(request, slug):
