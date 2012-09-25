@@ -1,6 +1,7 @@
 {% load url from future %}
 {% load innovative_tags %}
 {% load i18n %}
+{% load avatars %}
 {% url 'home' as home_url %}
 {% url 'about' as about_url %}
 {% url 'contact' as contact_url %}
@@ -63,6 +64,9 @@
                   <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
                   {% endif %}
                 </ul>
+                  {% if user.is_authenticated %}
+                  <!-- <img src='{% avatar request.user %}'> -->
+                  {% endif %}
               </li>
               <li>
                 <!-- <button class ="btn btn-primary" type="submit">{% trans "New"%}</button> -->
