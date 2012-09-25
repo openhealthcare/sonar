@@ -12,6 +12,7 @@
   <div class="row">
     <div class="span8">
       <h1 id="title">{{ item.title }}</h1>
+      <img src="{%if showoff.idea.image%}{{idea.showoff.image}}{%else%}{{STATIC_URL}}img/placeholder-innov-image.png{%endif%}" class="" alt="NO IMAGE!" />
       <p>
         Created on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.
       </p>
@@ -46,7 +47,9 @@
     </div>
     <div class="span4">
       <p>
-        <a href="/vote/item/{{item.id}}" class="btn btn-info">This is great!</a>
+        <a href="/vote/item/{{item.id}}" class="btn btn-info">
+          <img src="{{STATIC_URL}}img/thisisgreatbutton.png" class="" alt="" />
+        </a>
       </p>
 
       There have been {% vote_count 'item' item.id %} votes on this item
@@ -70,7 +73,7 @@
   <div class="row">
     <div class="comments span12">
       <h3>Comments and issues</h3>
-      {% render_comment_list for event %}
+      {% render_comment_list for item %}
       {% get_comment_form for item as form %}
       <form action="{% comment_form_target %}" method="post">
         <input type="hidden" name="next" value="{% url idea item.slug %}" />
