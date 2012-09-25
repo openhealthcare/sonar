@@ -15,19 +15,28 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
-from django.views.generic import CreateView, TemplateView, UpdateView
+from django.views.generic import CreateView, TemplateView
 
 from .forms import CompleteProfileForm, ItemForm, EditItemForm
 from .models import Item, Profile, Vote
 
 
-class CompleteProfile(UpdateView):
+class CompleteProfile(CreateView):
     form_class = CompleteProfileForm
     model = Profile
+    success_url = '/'
     template_name = 'account/complete_profile.html'
 
-    def get_object(self, *args, **kwargs):
-        return self.request.user
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_initial(self):
+        initial = super(CompleteProfile, self).get_initial()
+        initial['email'] = self.request.user.email
+        return initial
 
 
 class SignUp(CreateView):
@@ -204,6 +213,28 @@ def vote_up(request, target_type, target_id):
         v.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', "/"))
+
+
+@login_required
+def edit_profile(request):
+
+    init = None
+    if hasattr(request.user, 'profile'):
+        init = {
+            'email' : request.user.profile.email,
+            'first_name' : request.user.profile.first_name,
+            'last_name' : request.user.profile.last_name,
+            'affiliation' : request.user.profile.affiliation,
+        }
+
+    form = CompleteProfileForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            pass
+
+    return render_to_response('account/edit.html',
+        {'form': form}, RequestContext(request))
+
 
 
 def show_user_profile(request, username):
