@@ -14,3 +14,7 @@ class Hack(models.Model):
 
     class Meta:
         get_latest_by = 'pk'
+
+    # @property
+    def can_edit(self, user):
+        return True

@@ -1,0 +1,9 @@
+{% extends "myhacks_base.html" %}
+{% block myhacks_content %}
+
+<ul>
+{% for hack in object_list %}
+    <li>{{ hack.user }} {% if hack.user == request.user %}(<a href="{% url myhacks:edit hack.pk %}">edit</a>){% endif %}</li>
+{% endfor %}
+</ul>
+{% endblock myhacks_content %}

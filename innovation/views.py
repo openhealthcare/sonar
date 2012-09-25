@@ -1,7 +1,20 @@
-from django.template.defaultfilters import slugify
-from django.views.generic import TemplateView
-from models import Item
-from forms import ItemForm
+from django.views.generic import CreateView, TemplateView
+from profiles.models import Profile
+
+from .forms import RegisterForm, SocialRegisterForm
+from .models import Item
+
+
+class ProfileCreate(CreateView):
+    form_class = SocialRegisterForm
+    model = Profile
+    template_name = 'profiles/create.html'
+
+    def get_form(self, form_class):
+        if hasattr(self.request.user, 'email') and self.request.user.email:
+            form_class = RegisterForm
+        return super(ProfileCreate, self).get_form(form_class)
+
 
 class Search(TemplateView):
     template_name = 'search.html'
@@ -9,7 +22,7 @@ class Search(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Search, self).get_context_data(**kwargs)
         context['term'] = term = self.request.GET.get('term', 'FTW')
-        innovats = Item.objects.filter(summary__contains=term)
+        innovats = Item.objects.filter(summary__icontains=term)
         context['innovats'] = innovats
         if len(innovats) > 0:
             innovated = True
@@ -34,3 +47,4 @@ def show_innovation(request, ):
     Displays a specific innovation.
     """
     pass
+
