@@ -4,19 +4,38 @@
 {% load comments %}
 
 {% block content %}
-<h1 id="title">{{ item.title}}</h1>
-
+<h1 id="title">{{ item.title }}</h1>
 <p id="summary">Suggested by <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a> on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.</p>
+{% if user.is_authenticated %}
+<a href="/idea/foo/edit" class="btn btn-primary">Edit</a>
+{% endif %}
 
-<div id="description">
-{{ item.description|markdown }}
+<hr/>
+
+<h2>Summary</h2>
+<div id="summary">
+{{ item.summary|markdown }}
 </div>
 
-<ul id="tags">
-{% for tag in item.tags %}
-    <li class="tag"><a href="/tag/{{ tag }}">{{ tag }}</a></li>
+<h2>Use Case</h2>
+<div id="usecase">
+{{ item.how_used|markdown }}
+</div>
+
+<h2>Benefits</h2>
+<div id="benefits">
+{{ item.benefits|markdown }}
+</div>
+
+<h2>Further Information</h2>
+<div id="further-info">
+{{ item.further_information|markdown }}
+</div>
+<hr/>
+Tagged with:
+{% for tag in tags %}
+<i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
 {% endfor %}
-</ul>
 {% endblock content %}
 
 <div class="comments">
