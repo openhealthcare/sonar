@@ -1,12 +1,13 @@
 from django.template.defaultfilters import slugify
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.views.generic import CreateView, TemplateView
 from profiles.models import Profile
 
-from forms import RegisterForm, SocialRegisterForm, ItemForm
+from forms import RegisterForm, SocialRegisterForm, ItemForm, EditItemForm
 from models import Item
 
 
@@ -71,10 +72,13 @@ def new_innovation(request):
                 benefits=benefits, further_information=further_information)
             tags = form.cleaned_data['tags']
             item.tags.add(*tags)
+            messages.info(request, "Success. You have created a new innovation")
             return HttpResponseRedirect('/idea/%s' % item.slug)
     else:
         form = ItemForm()
     context['form'] = form
+    context['post_to'] = '/idea/new'
+    context['title'] = 'Create new innovation'
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
 
@@ -86,3 +90,33 @@ def show_innovation(request, slug):
     tags = item.tags.all()
     return render_to_response('innovation/item.html', {'item': item,
         'tags': tags}, RequestContext(request))
+
+@login_required
+def edit_innovation(request, slug):
+    """
+    Given an idea identified by a slug will attempt to allow you to edit it.
+    """
+    item = Item.objects.get(slug=slug)
+    if item.created_by != request.user:
+        return HttpResponseNotFound()
+
+    context = {}
+    if request.method == 'POST':
+        form = EditItemForm(request.POST)
+        if form.is_valid():
+            item.summary = form.cleaned_data['summary']
+            item.how_used = form.cleaned_data['how_used']
+            item.benefits = form.cleaned_data['benefits']
+            item.further_information = form.cleaned_data['further_information']
+            item.save()
+            tags = form.cleaned_data['tags']
+            item.tags.add(*tags)
+            messages.info(request, "Success. You have updated your innovation.")
+            return HttpResponseRedirect('/idea/%s' % item.slug)
+    else:
+        form = EditItemForm(instance=item)
+    context['form'] = form
+    context['post_to'] = '/idea/edit/%s/' % item.slug
+    context['title'] = 'Edit %s' % item.title
+    return render_to_response('innovation/edit_item.html', context,
+        RequestContext(request))
