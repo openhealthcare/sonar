@@ -12,6 +12,7 @@
   <div class="row">
     <div class="span8">
       <h1 id="title">{{ item.title }}</h1>
+      <img src="{%if showoff.idea.image%}{{idea.showoff.image}}{%else%}{{STATIC_URL}}img/placeholder-innov-image.png{%endif%}" class="" alt="NO IMAGE!" />
       <p>
         Created on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.
       </p>
@@ -46,13 +47,14 @@
     </div>
     <div class="span4">
       <p>
-        <a href="/vote/item/{{item.id}}" class="btn btn-info">This is great!</a>
+        <a href="/vote/item/{{item.id}}" class="btn btn-info">
+          <img src="{{STATIC_URL}}img/thisisgreatbutton.png" class="" alt="" />
+        </a>
       </p>
 
       There have been {% vote_count 'item' item.id %} votes on this item
-    </div>
       <p id="summary">
-        <img src="{% avatar item.created_by %}" class="img-rounded">
+        <img src="{%avatar user%}" class="img-rounded" style="max-width: 24px">
         <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a>
       </p>
       <p>
@@ -61,16 +63,32 @@
       <hr />
       <h4>Tags</h4>
       <p>
-          Tagged with:
           {% for tag in tags %}
             <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
           {% endfor %}
       </p>
+    </div>
   </div> <!-- row -->
   <div class="row">
     <div class="comments span12">
-      <h3>Comments and issues</h3>
-      {% render_comment_list for event %}
+      <h3>Comments</h3>
+
+      {% get_comment_list for item as comments %}
+      {% for comment in comments %}
+      <blockquote>
+        {{ comment.comment|markdown }}
+        <small>
+        {% if comment.user_url %}
+            <a href="comment.user_url">{{ comment.user_name }}</a>
+        {% elif comment.user %}
+            <img src="{% avatar comment.user %}" class="img-rounded" style="max-width: 20px"/> <a href="/user/{{ comment.user.username }}/">{{ comment.user.username }}</a>
+        {% endif %}
+        {{ comment.submit_date|date:"D d M Y H:m" }}</span>.
+        </small>
+      </blockquote>
+      {% endfor %}
+
+      <p>Use the form below to leave a comment on this innovation:</p>
       {% get_comment_form for item as form %}
       <form action="{% comment_form_target %}" method="post">
         <input type="hidden" name="next" value="{% url idea item.slug %}" />

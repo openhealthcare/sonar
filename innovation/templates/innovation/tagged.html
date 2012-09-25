@@ -2,9 +2,9 @@
 {% load account %}
 {% load markup %}
 {% load comments %}
-
+{% block title %}{{ tag }}{% endblock %}
 {% block content %}
-<h1>Innovations tagged with &ldquo;{{ tag }}&rdquo;</h1>
+<h1>Ideas tagged with &ldquo;{{ tag }}&rdquo;</h1>
 {% for item in items %}
 <hr/>
 <div class="innovation">
