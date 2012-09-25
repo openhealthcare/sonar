@@ -16,4 +16,3 @@ django-taggit
 markdown
 -e git://github.com/python-imaging/Pillow.git#egg=pillow
 -e git://github.com/wardi/django-filebrowser-no-grappelli.git#egg=django-filebrowser
-django-voting
