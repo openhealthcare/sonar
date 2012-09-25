@@ -4,6 +4,12 @@ from profiles.models import Profile
 from models import Item
 
 
+class CompleteProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('email', 'first_name', 'last_name', 'pseudonym', 'affiliation')
+
+
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
@@ -15,13 +21,3 @@ class EditItemForm(forms.ModelForm):
         model = Item
         exclude = ('slug', 'created_by', 'title')
 
-
-class SocialRegisterForm(forms.ModelForm):
-    class Meta:
-        fields = ('email', 'first_name', 'last_name', 'pseudonym', 'affiliation')
-        model = Profile
-
-
-class RegisterForm(SocialRegisterForm):
-    class Meta(SocialRegisterForm.Meta):
-        exclude = ('email',)

@@ -67,6 +67,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
+    'innovation.context_processors.recent',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -75,8 +76,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Allauth options
-# ACCOUNT_SIGNUP_FORM_CLASS='innovation.forms.RegisterForm'
-
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/accounts/login'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
