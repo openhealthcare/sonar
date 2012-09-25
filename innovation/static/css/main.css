@@ -30,17 +30,16 @@ h1, h2, h3, h4, h5{
 /* } */
 
 footer{
-    background-image:url('../img/footer-wide.png');
+    /* background-image:url('../img/footer-wide.png'); */
     background-repeat:repeat-x;
     /* background-color: #6be4ef; */
     background-position: center bottom;
     min-height: 300px;
 }
-
-footer .row{
-    padding-top:75px;
+footer .nav-list a,  .nav-list a:visited{
+    colour: black!important;
+}
 
 .sharebuttons span {
     margin-bottom:0.2em;
->>>>>>> Share links
 }
