@@ -147,3 +147,14 @@ def vote_up(request, target_type, target_id):
         v.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', "/"))
+
+
+def show_user_profile(request, username):
+    """
+    Given a username, displays a page full of information about them.
+    """
+    user = User.objects.get(username=username)
+    if not user:
+        return HttpResponseNotFound()
+    return render_to_response('innovation/user_profile.html',
+        {'user': user}, RequestContext(request))
