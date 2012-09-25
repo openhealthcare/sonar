@@ -8,7 +8,7 @@ def vote_count(target_type, id):
     return Vote.objects.filter(target_type=target_type, target_id=id).count()
 
 @register.simple_tag
-def vote_count(target_type, id, rolename):
+def vote_count_for_role(target_type, id, rolename):
     from innovation.models import Vote, Role
 
     try:
