@@ -33,6 +33,11 @@ class CompleteProfile(CreateView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_initial(self):
+        initial = super(CompleteProfile, self).get_initial()
+        initial['email'] = self.request.user.email
+        return initial
+
 
 class SignUp(CreateView):
     form_class = SignupForm
