@@ -3,6 +3,8 @@
 {% load markup %}
 {% load comments %}
 
+{% block title %}{{item.title}}{% endblock %}
+
 {% block content %}
     <h1 id="title">{{ item.title }}</h1>
     <p id="summary">
