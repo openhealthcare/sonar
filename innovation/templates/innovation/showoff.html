@@ -1,4 +1,5 @@
 {% load url from future %}
+{% load avatars %}
 
 <div class="row">
   <div class="span4">
@@ -10,9 +11,9 @@
       {{showoff.idea.summary}}
     </p>
     <p>
-      Users Using this!
+      Using this:
       {% for u in showoff.votes %}
-        {{u.created_by}} |
+        <img src="{% avatar u.created_by %}">
       {% endfor %}
       <a class="btn btn-danger" href="/idea/{{showoff.idea.slug}}">See More</a>
     </p>
