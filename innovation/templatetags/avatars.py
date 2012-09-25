@@ -14,6 +14,6 @@ def avatar(user):
         pass
 
     h = hashlib.md5((user.email or '').strip().lower()).hexdigest()
-    return 'http://www.gravatar.com/avatar/%s' % h
+    return 'http://www.gravatar.com/avatar/%s?d=mm' % h
 
 
