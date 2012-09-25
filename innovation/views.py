@@ -2,7 +2,7 @@ from django.views.generic import CreateView, TemplateView
 from profiles.models import Profile
 
 from .forms import RegisterForm, SocialRegisterForm
-from .models import Item
+from .models import Item, Vote
 
 
 class ProfileCreate(CreateView):
@@ -31,6 +31,19 @@ class Search(TemplateView):
         context['innovated'] = innovated
         return context
 
+class Home(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self,**kw):
+        context = super(Home, self).get_context_data(**kw)
+        showoff = dict(idea=Item.objects.order_by('?')[0])
+        votes = Vote.objects.filter(target_id=showoff['idea'].id, target_type='item')
+        showoff['votes'] = votes
+        context['showoff'] = showoff
+        context['recent'] = Item.objects.order_by('created_on')[:10]
+        context['top'] = list(Item.objects.order_by('created_on'))[-10:]
+
+        return context
 
 def new_innovation(request):
     """

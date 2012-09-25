@@ -1,6 +1,6 @@
 {% load url from future %}
 {% load innovative_tags %}
-
+{% load i18n %}
 {% url 'home' as home_url %}
 {% url 'about' as about_url %}
 {% url 'contact' as contact_url %}
@@ -65,11 +65,15 @@
                 </ul>
               </li>
               <li>
-                 <form action="/search" class="navbar-form pull-left">
-                  <input type="text" class="span2" name="term">
-                  <button type="submit" class="btn">Findit (An Innovation-like-thing)</button>
+                <!-- <button class ="btn btn-primary" type="submit">{% trans "New"%}</button> -->
+                <a href="/item/new/">+ New</a>
+              </li>
+              <li>
+                <form action="/search" class="navbar-form pull-left">
+                  <input type="text" class="span2" name="term" placeholder="Whatsup?">
                 </form>
               </li>
+
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -79,7 +83,7 @@
       <div class="row">
         <div class="span3"></div>
 
-        <div class="span6">
+        <div class="span8">
 
           {% if messages %}
           <div class="alert">

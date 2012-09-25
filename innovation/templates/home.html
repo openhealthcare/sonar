@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 {% load account %}
+{% load i18n %}
 
 {% block content %}
-<h1>Innovation, woo yea!</h1>
-
-{% if request.user.is_authenticated %}
-    Welcome {% user_display request.user %} !!!
-{% endif %}
-
-
+{% include 'innovation/showoff.html' %}
+<div class="row">
+  <div class="span4">
+    <ul>
+    {% for item in recent %}
+      <li>
+        {{item.title}}
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+  <div class="span4">
+    {% for item in top %}
+      <li>
+        {{item.title}}
+      </li>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock content %}

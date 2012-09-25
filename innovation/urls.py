@@ -3,13 +3,13 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 
-from .views import ProfileCreate, Search
+from .views import ProfileCreate, Search, Home
 
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url('^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url('^$', Home.as_view(), name='home'),
     url('^about$', TemplateView.as_view(template_name='about.html'), name='about'),
     url('^contact$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url(r'^accounts/', include('allauth.urls')),
