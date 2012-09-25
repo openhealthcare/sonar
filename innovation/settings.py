@@ -92,7 +92,7 @@ SECRET_KEY = 'z(pw08&amp;o@5@!9gr_ni#g@v8u!mv61(8u=5$74b2-p(@+095oo='
 SITE_ID = 1
 WSGI_APPLICATION = 'innovation.wsgi.application'
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -100,7 +100,6 @@ INSTALLED_APPS = (
     'profiles',
     'uni_form',
     'taggit',
-    'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.linkedin',
@@ -121,7 +120,10 @@ INSTALLED_APPS = (
     'innovation',
     'south',
     'myhacks',
-)
+]
+
+if not DEBUG:
+    INSTALLED_APPS += ['allauth.socialaccount.providers.facebook']
 
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
