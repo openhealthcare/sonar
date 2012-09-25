@@ -3,7 +3,8 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 
-from .views import ProfileCreate, Search, Home
+from .views import CompleteProfile, Home, SignUp, Search
+
 
 admin.autodiscover()
 
@@ -11,8 +12,9 @@ urlpatterns = patterns('',
     url('^$', Home.as_view(), name='home'),
     url('^about$', TemplateView.as_view(template_name='about.html'), name='about'),
     url('^contact$', TemplateView.as_view(template_name='contact.html'), name='contact'),
+    url('^accounts/signup/$', SignUp.as_view(), name='account_signup'),
+    url('^accounts/signup/profile/$', CompleteProfile.as_view(), name='complete_profile'),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^create-profile$', ProfileCreate.as_view(), name='profile-create'),
     url('^search/?$', Search.as_view(template_name='search.html'), name='search'),
 
     url('^vote/(?P<target_type>item|comment)/(?P<target_id>\d+)$','innovation.views.vote_up', name='vote'),
