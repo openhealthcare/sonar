@@ -46,20 +46,7 @@
             <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
           {% endfor %}
 
-          <div class="comments">
-            <h3>Comments and issues</h3>
-            {% get_comment_form for item as form %}
-            <form action="{% comment_form_target %}" method="post">
-              <input type="hidden" name="next" value="{% url idea item.slug %}" />
-              {% csrf_token %}
-              {{ form }}
-              <div class="control-group">
-                <div class="controls">
-                  <input type="submit" name="submit" value="Post">
-                  <input type="submit" name="preview" value="Preview">
-                </div>
-              </div>
-          </div>
+
         </div>
     </div>
     <div class="span4">
@@ -73,7 +60,32 @@
         <img src="{%avatar user%}" class="img-rounded">
         <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a>
       </p>
-
-
+      <p>
+        {{item.created_by.bio}}
+      </p>
+      <hr />
+      <h4>Tags</h4>
+      <p>
+        {% for tag in item.tags.all %}
+          <span class="label label-info">{{tag}}</span>
+        {% endfor %}
+      </p>
   </div> <!-- row -->
+  <div class="row">
+    <div class="comments span12">
+      <h3>Comments and issues</h3>
+      {% get_comment_form for item as form %}
+      <form action="{% comment_form_target %}" method="post">
+        <input type="hidden" name="next" value="{% url idea item.slug %}" />
+        {% csrf_token %}
+        {{ form }}
+        <div class="control-group">
+          <div class="controls">
+            <input type="submit" name="submit" value="Post">
+            <input type="submit" name="preview" value="Preview">
+          </div>
+        </div>
+    </div>
+  </div>
+
 {% endblock content %}
