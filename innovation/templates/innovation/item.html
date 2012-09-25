@@ -42,7 +42,7 @@
         {% get_comment_form for item as form %}
         <table>
           <form action="{% comment_form_target %}" method="post">
-            <input type="hidden" name="next" value="{% url 'idea' item.slug %}" />
+            <input type="hidden" name="next" value="{% url idea item.slug %}" />
             {% csrf_token %}
             {{ form }}
             <tr>
