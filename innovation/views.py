@@ -22,6 +22,7 @@ from .models import Item, Profile, Vote
 class CompleteProfile(UpdateView):
     form_class = CompleteProfileForm
     model = Profile
+    success_url = '/'
     template_name = 'account/complete_profile.html'
 
     def get_object(self, *args, **kwargs):
