@@ -15,7 +15,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, UpdateView
 
 from .forms import CompleteProfileForm, ItemForm, EditItemForm
 from .models import Item, Profile, Vote
@@ -215,27 +215,20 @@ def vote_up(request, target_type, target_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', "/"))
 
 
-@login_required
-def edit_profile(request):
+class EditProfile(UpdateView):
+    model = Profile
+    template_name = 'account/edit.html'
 
-    from pdb import set_trace; set_trace()
+    def get_object(self):
+        u = self.request.user
+        print u.pk
+        for p in Profile.objects.all():
+            print p.user_ptr.id
+        return Profile.objects.get(user_ptr__id=u.pk)
 
-    init = None
-    if hasattr(request.user, 'profile'):
-        init = {
-            'email' : request.user.profile.email,
-            'first_name' : request.user.profile.first_name,
-            'last_name' : request.user.profile.last_name,
-            'affiliation' : request.user.profile.affiliation,
-        }
-
-    form = CompleteProfileForm(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            pass
-
-    return render_to_response('account/edit.html',
-        {'form': form}, RequestContext(request))
+    def get_success_url(self):
+        return '/accounts/edit'
+        from pdb import set_trace; set_trace()
 
 
 

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 
-from .views import CompleteProfile, Home, SignUp, Search
+from .views import CompleteProfile, Home, SignUp, Search, EditProfile
 
 
 admin.autodiscover()
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url('^accounts/signup/$', SignUp.as_view(), name='account_signup'),
     url('^accounts/signup/profile/$', CompleteProfile.as_view(), name='complete_profile'),
 
-    url(r'^accounts/edit', 'innovation.views.edit_profile', name='edit_profile'),
+    url(r'^accounts/edit', EditProfile.as_view(), name='edit_profile'),
     url(r'^accounts/', include('allauth.urls')),
     url('^search/?$', Search.as_view(template_name='search.html'), name='search'),
 
