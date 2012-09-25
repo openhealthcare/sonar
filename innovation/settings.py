@@ -22,6 +22,9 @@ if not DEBUG:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+else:
+    EMAIL_PORT = 1025
+    EMAIL_HOST = 'localhost'
 
 
 # DEFAULT_FROM_EMAIL is for email confirmation from the Django allauth module
@@ -38,6 +41,7 @@ MEDIA_ROOT = os.path.join(DIRNAME, 'client_media')
 MEDIA_URL = '/client_media/'
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
 STATIC_URL = '/static/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + "/admin/"
 
 TEMPLATE_DEBUG = DEBUG
 TEMPLATE_DIRS = (os.path.join(DIRNAME, 'templates'))
@@ -71,7 +75,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Allauth options
-# ACCOUNT_SIGNUP_FORM_CLASS=''
+# ACCOUNT_SIGNUP_FORM_CLASS='innovation.forms.RegisterForm'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/accounts/login'
@@ -79,7 +83,7 @@ ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[NHS Innovation Portal] '
-ACCOUNT_EMAIL_VERIFICATION = True
+ACCOUNT_EMAIL_VERIFICATION = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 ACCOUNT_UNIQUE_EMAIL = True
@@ -100,6 +104,7 @@ INSTALLED_APPS = [
     'profiles',
     'uni_form',
     'taggit',
+    'filebrowser',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.linkedin',

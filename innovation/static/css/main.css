@@ -1,13 +1,15 @@
-
+body {padding-top:0;}
 .socialaccount_providers {
     list-style: none;
 }
+
 .socialaccount_provider {
     margin-left: 50px;
     padding: 8px;
 }
 
 .twitter {
+
 }
 
 .linkedin {

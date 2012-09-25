@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load account %}
 {% load i18n %}
+{% load avatars %}#
 
 {% block content %}
 {% include 'innovation/showoff.html' %}
@@ -22,5 +23,17 @@
     {% endfor %}
   </div>
 </div>
+
+
+
+
+<!-- <h1>Innovation, woo yea!</h1> -->
+
+<!-- {% if request.user.is_authenticated %} -->
+<!--     Welcome {% user_display request.user %} !!! -->
+
+<!--     <img src='{% avatar request.user %}'> -->
+<!-- {% endif %} -->
+
 
 {% endblock content %}
