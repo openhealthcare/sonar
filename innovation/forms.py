@@ -19,5 +19,5 @@ class ItemForm(forms.ModelForm):
 class EditItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        exclude = ('slug', 'created_by', 'title')
+        exclude = ('slug', 'created_by', 'title', 'hero_image')
 
