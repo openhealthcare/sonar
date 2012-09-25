@@ -1,0 +1,21 @@
+{% load url from future %}
+{% load avatars %}
+
+<div class="row">
+  <div class="span6">
+    <img src="{%if showoff.idea.image%}{{idea.showoff.image}}{%else%}{{STATIC_URL}}img/sub2.jpg{%endif%}" class="" alt="NO IMAGE!" />
+  </div>
+  <div class="span6">
+    <h2>{{showoff.idea.title}}</h2>
+    <p>
+      {{showoff.idea.summary}}
+    </p>
+    <p>
+      Using this:
+      {% for u in showoff.votes %}
+        <img src="{% avatar u.created_by %}">
+      {% endfor %}
+      <a class="btn btn-danger" href="/idea/{{showoff.idea.slug}}">See More</a>
+    </p>
+  </div>
+</div>

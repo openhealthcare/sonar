@@ -1,7 +1,7 @@
 from django import forms
 from profiles.models import Profile
 
-from .models import Item
+from models import Item
 
 
 class CompleteProfileForm(forms.ModelForm):
@@ -13,5 +13,11 @@ class CompleteProfileForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        exclude = ('slug',)
+        exclude = ('slug', 'created_by')
+
+
+class EditItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        exclude = ('slug', 'created_by', 'title')
 
