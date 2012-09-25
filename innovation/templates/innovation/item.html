@@ -70,6 +70,7 @@
   <div class="row">
     <div class="comments span12">
       <h3>Comments and issues</h3>
+      {% render_comment_list for event %}
       {% get_comment_form for item as form %}
       <form action="{% comment_form_target %}" method="post">
         <input type="hidden" name="next" value="{% url idea item.slug %}" />
