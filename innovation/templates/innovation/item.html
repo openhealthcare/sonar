@@ -2,6 +2,8 @@
 {% load account %}
 {% load markup %}
 {% load comments %}
+{% load votes %}
+
 
 {% block title %}{{item.title}}{% endblock %}
 
@@ -11,8 +13,11 @@
         Suggested by <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a> on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>.</p>
     {% if user.is_authenticated %}
         <a href="/idea/foo/edit" class="btn btn-primary">Edit</a>
+
+        <a href="/vote/item/{{item.id}}" class="btn btn-info">Vote</a>
     {% endif %}
 
+    <div>There have been {% vote_count 'item' item.id %} votes on this item
     <hr/>
 
     <div id="summary" class="lead">
