@@ -31,7 +31,7 @@ class CompleteProfile(CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.user = self.request.user
+        self.object.user_ptr = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -220,19 +220,11 @@ def vote_up(request, target_type, target_id):
 
 class EditProfile(UpdateView):
     model = Profile
+    success_url = reverse_lazy('edit_profile')
     template_name = 'account/edit.html'
 
     def get_object(self):
-        u = self.request.user
-        print u.pk
-        for p in Profile.objects.all():
-            print p.user_ptr.id
-        return Profile.objects.get(user_ptr__id=u.pk)
-
-    def get_success_url(self):
-        return '/accounts/edit'
-        from pdb import set_trace; set_trace()
-
+        return self.request.user.profile
 
 
 def show_user_profile(request, username):
