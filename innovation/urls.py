@@ -5,7 +5,6 @@ from django.conf import settings
 
 from .views import ProfileCreate, Search
 
-
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -30,9 +29,11 @@ urlpatterns = patterns('',
     url(r'^idea/edit/(?P<slug>[^\.]+)/$', 'innovation.views.edit_innovation'),
     url(r'^idea/(?P<slug>[^\.]+)/$', 'innovation.views.show_innovation'),
 
-
+    # Filebrowser
+    (r'^admin/filebrowser/', include('filebrowser.urls')),
 )
 
 urlpatterns += patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    (r'^client_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )

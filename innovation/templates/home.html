@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load account %}
+{% load avatars %}
 
 {% block content %}
 <h1>Innovation, woo yea!</h1>
 
 {% if request.user.is_authenticated %}
     Welcome {% user_display request.user %} !!!
+
+    <img src='{% avatar request.user %}'>
 {% endif %}
 
 

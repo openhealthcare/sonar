@@ -34,7 +34,7 @@
     </script>
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -67,7 +67,7 @@
               <li>
                  <form action="/search" class="navbar-form pull-left">
                   <input type="text" class="span2" name="term">
-                  <button type="submit" class="btn">Findit (An Innovation-like-thing)</button>
+                  <button type="submit" class="btn">Search</button>
                 </form>
               </li>
             </ul>
@@ -75,34 +75,34 @@
         </div>
       </div>
     </div>
+    
     <div id="page" class="container">
+      
+      <!-- alerts and messages -->
       <div class="row">
         <div class="span3"></div>
-
         <div class="span6">
-
-          {% if messages %}
-          <div class="alert">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            {% for message in messages %}
-              {{ message }}
-            {% endfor %}
-          </div>
-          {% endif %}
-
-          {% block content %}
-          <p>Home...</p>
-          {% endblock %}
-
-          <hr>
-
-          <footer>
-            <p>&copy; NHS - the content on this website is licensed under a <a href="http://creativecommons.org/licenses/by/2.0/uk/">Creative Commons license</a></p>
-          </footer>
+         {% if messages %}
+            <div class="alert">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+            </div>
+         {% endif %}
         </div>
-
-        <div class="span3"></div>
       </div>
+
+        <!-- Main content -->
+        {% block content %}
+
+        {% endblock %}
+        
+        <!-- Footer -->
+        <footer>
+          <p>&copy; NHS - the content on this website is licensed under a <a href="http://creativecommons.org/licenses/by/2.0/uk/">Creative Commons license</a></p>
+        </footer>
+        
     </div>
   </body>
 </html>
