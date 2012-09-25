@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load account %}
+{% load markup %}
+{% load comments %}
+
+{% block content %}
+<h1>Innovations tagged with &ldquo;{{ tag }}&rdquo;</h1>
+{% for item in items %}
+<hr/>
+<div class="innovation">
+    <h3>{{ item.title  }}</h3>
+    <p>Suggested by <a href="/user/{{ item.created_by.username }}" id="creator"> {{ item.created_by.username }}</a> on <span id="created_on">{{ item.created_on|date:"D d M Y" }}</span>. <a href="/idea/{{ item.slug }}">More details...</a></p>
+    <div id="summary" class="lead">
+        {{ item.summary|markdown }}
+    </div>
+    Tagged with:
+    {% for tag in item.tags.all %}
+        <i class="icon-tag"></i><a href="/tag/{{ tag }}" class="tag">{{ tag }}</a>
+    {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}
