@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 
-from .views import CompleteProfile, Home, SignUp, Search, EditProfile
-
+from .views import CompleteProfile, Home, SignUp, Search, EditProfile, ShowInnovation
 
 admin.autodiscover()
 
@@ -34,7 +33,8 @@ urlpatterns = patterns('',
     # innovation management
     url(r'^idea/new/$', 'innovation.views.new_innovation', name='new_idea'),
     url(r'^idea/edit/(?P<slug>[^\.]+)/$', 'innovation.views.edit_innovation', name="edit_idea"),
-    url(r'^idea/(?P<slug>[^\.]+)/$', 'innovation.views.show_innovation', name='idea'),
+    url(r'^idea/(?P<slug>[^\.]+)/$', ShowInnovation.as_view(), name='idea'),
+    # url(r'^idea/(?P<slug>[^\.]+)/$', 'innovation.views.show_innovation', name='idea'),
 
     # Filebrowser
     (r'^admin/filebrowser/', include('filebrowser.urls')),
