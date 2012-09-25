@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load account %}
 {% load markup %}
+{% load comments %}
 
 {% block content %}
 <h1 id="title">{{ item.title}}</h1>
@@ -17,3 +18,8 @@
 {% endfor %}
 </ul>
 {% endblock content %}
+
+<div class="comments">
+    <h3>Comments and issues</h3>
+    {% render_comment_list for item %}
+</div>

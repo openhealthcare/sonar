@@ -5,7 +5,6 @@ from django.conf import settings
 
 from .views import ProfileCreate, Search
 
-
 admin.autodiscover()
 
 urlpatterns = patterns('',
