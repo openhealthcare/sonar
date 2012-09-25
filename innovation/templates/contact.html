@@ -2,12 +2,14 @@
 {% load account %}
 {% block title %}Contact{% endblock %}
 {% block content %}
-<h1>Contact details and stuff</h1>
-
-{% if request.user.is_authenticated %}
-    Welcome {% user_display request.user %} !!!
-{% endif %}
-
-
+<h1>Contact</h1>
+<div class="container">
+  <div class="row-fluid">
+    <div class="container span4 offset4">
+      <h1>Talk to us!</h1>
+      <h1><a href="mailto:carl.reynolds@openhealthcare.co.uk?subject=NHSonar&body=Hello%20NHSonar People,">Send email</a></h1>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
