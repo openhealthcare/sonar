@@ -157,7 +157,7 @@ class ShowInnovation(UpdateView):
     model = Item
     template_name = 'innovation/item.html'
     form_class = HeroImageForm
-    
+
     def get_context_data(self, **kwargs):
         context = super(ShowInnovation, self).get_context_data(**kwargs)
         context['tags'] = self.object.tags.all()
@@ -207,9 +207,9 @@ def vote_up(request, target_type, target_id):
     import json
     from .models import Vote
 
-    if not Vote.objects.filter(target_type=target_type,
+    if Vote.objects.filter(target_type=target_type,
                            created_by=request.user,
-                           target_id=target_id).count():
+                           target_id=target_id).count() == 0:
         v = Vote(target_type=target_type,
                  target_id=target_id,
                  created_by=request.user)
