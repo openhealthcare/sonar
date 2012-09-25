@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django import forms
 from profiles.models import Profile
 
