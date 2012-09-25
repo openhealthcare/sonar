@@ -218,6 +218,8 @@ def vote_up(request, target_type, target_id):
 @login_required
 def edit_profile(request):
 
+    from pdb import set_trace; set_trace()
+
     init = None
     if hasattr(request.user, 'profile'):
         init = {
