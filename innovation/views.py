@@ -2,6 +2,7 @@ from django.template.defaultfilters import slugify
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.views.generic import CreateView, TemplateView
