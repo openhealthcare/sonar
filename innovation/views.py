@@ -4,6 +4,8 @@ from allauth.account.models import EmailAddress
 from allauth.account.utils import send_email_confirmation, user_display
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.template import RequestContext
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -13,19 +15,28 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
-from django.views.generic import CreateView, TemplateView, UpdateView
+from django.views.generic import CreateView, TemplateView
 
 from .forms import CompleteProfileForm, ItemForm, EditItemForm
 from .models import Item, Profile, Vote
 
 
-class CompleteProfile(UpdateView):
+class CompleteProfile(CreateView):
     form_class = CompleteProfileForm
     model = Profile
+    success_url = '/'
     template_name = 'account/complete_profile.html'
 
-    def get_object(self, *args, **kwargs):
-        return self.request.user
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_initial(self):
+        initial = super(CompleteProfile, self).get_initial()
+        initial['email'] = self.request.user.email
+        return initial
 
 
 class SignUp(CreateView):
