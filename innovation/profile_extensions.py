@@ -13,7 +13,7 @@ class InnovationProfile(object):
         cls.add_to_class('industry_karma', models.IntegerField())
         cls.add_to_class('affiliation', models.CharField(max_length=255))
         cls.add_to_class('phone_number', models.CharField(max_length=50))
-        cls.add_to_class('bio', models.TextField())
+        cls.add_to_class('bio', models.TextField(null=True, blank=True))
 
         cls.__unicode__ = cls.get_full_name
 
