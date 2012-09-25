@@ -39,9 +39,6 @@
 
     <div class="comments">
         <h3>Comments and issues</h3>
-        {% render_comment_list for item %}
-        
-        
         {% get_comment_form for item as form %}
         <table>
           <form action="{% comment_form_target %}" method="post">
@@ -56,7 +53,5 @@
             </tr>
           </form>
         </table>
-        
     </div>
-
 {% endblock content %}
