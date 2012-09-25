@@ -108,6 +108,38 @@
 
         <!-- Footer -->
         <footer>
+          <hr />
+
+          <div class="row">
+            <div class="span4">
+              <ul class="nav nav-list">
+                <li>
+                  <a href="https://github.com/openhealthcare/innovations_r_us">The NHSonar source codes...</a>
+                </li>
+                <li>
+                  <a href="http://nhshackday.com/">...were lovingly crafted on a NHS Hack Day...</a>
+                </li>
+                <li>
+                  <a href="http://openhealthcare.org.uk">...organised by Open Healthcare...</a>
+                </li>
+              </ul>
+
+            </div>
+            <div class="span4">
+              <h4>Recent Feeds</h4>
+            </div>
+            <div class="span4">
+              <h4>Recent Activity</h4>
+              <ul class="nav nav-list">
+                {% for item in recent %}
+                  <li>
+                    <a href="/idea/{{item.slug}}">{{item.title}}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+          </div>
           <p>&copy; NHS - the content on this website is licensed under a <a href="http://creativecommons.org/licenses/by/2.0/uk/">Creative Commons license</a></p>
         </footer>
 
