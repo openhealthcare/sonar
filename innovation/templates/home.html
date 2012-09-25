@@ -1,15 +1,36 @@
 {% extends "base.html" %}
 {% load account %}
-{% load avatars %}
+{% load i18n %}
+{% load avatars %}#
 
 {% block content %}
-<h1>Innovation, woo yea!</h1>
+{% include 'innovation/showoff.html' %}
+<div class="row">
+  <div class="span4">
+    <h3>Recent Activity</h3>
+    <ul>
+    {% for item in recent %}
+      <li>
+        <a href="/idea/{{item.slug}}">
+        {{item.title}}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+  <div class="span4">
+    <h3>Top Rated</h3>
+    {% for item in top %}
+      <li>
+        <a href="/idea/{{item.slug}}">
+        {{item.title}}
+        </a>
+      </li>
+    {% endfor %}
+  </div>
+</div>
 
-{% if request.user.is_authenticated %}
-    Welcome {% user_display request.user %} !!!
 
-    <img src='{% avatar request.user %}'>
-{% endif %}
 
 
 

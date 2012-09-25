@@ -1,6 +1,7 @@
 {% load url from future %}
 {% load innovative_tags %}
-
+{% load i18n %}
+{% load avatars %}
 {% url 'home' as home_url %}
 {% url 'about' as about_url %}
 {% url 'contact' as contact_url %}
@@ -63,21 +64,28 @@
                   <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
                   {% endif %}
                 </ul>
+                  {% if user.is_authenticated %}
+                  <!-- <img src='{% avatar request.user %}'> -->
+                  {% endif %}
               </li>
               <li>
-                 <form action="/search" class="navbar-form pull-left">
-                  <input type="text" class="span2" name="term">
-                  <button type="submit" class="btn">Search</button>
+                <!-- <button class ="btn btn-primary" type="submit">{% trans "New"%}</button> -->
+                <a href="/item/new/">+ New</a>
+              </li>
+              <li>
+                <form action="/search" class="navbar-form pull-left">
+                  <input type="text" class="span2" name="term" placeholder="Search">
                 </form>
               </li>
+
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-    
+
     <div id="page" class="container">
-      
+
       <!-- alerts and messages -->
       <div class="row">
         <div class="span3"></div>
@@ -97,12 +105,12 @@
         {% block content %}
 
         {% endblock %}
-        
+
         <!-- Footer -->
         <footer>
           <p>&copy; NHS - the content on this website is licensed under a <a href="http://creativecommons.org/licenses/by/2.0/uk/">Creative Commons license</a></p>
         </footer>
-        
+
     </div>
   </body>
 </html>
