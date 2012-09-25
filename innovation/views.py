@@ -40,6 +40,6 @@ def show_innovation(request, slug):
     """
     Displays a specific innovation.
     """
-    item = Item.objects.filter(slug=slug)
+    item = Item.objects.get(slug=slug)
     return render_to_response('innovation/item.html', {item: item},
         RequestContext(request))
