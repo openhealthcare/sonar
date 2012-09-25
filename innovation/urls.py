@@ -26,7 +26,7 @@ urlpatterns = patterns('',
 
     # innovation management
     url(r'^idea/new/$', 'innovation.views.new_innovation', name='new_idea'),
-    url(r'^idea/(?P<slug>[^\.]+)/$', 'innovation.views.show_innovation'),
+    url(r'^idea/(?P<slug>[^\.]+)/$', 'innovation.views.show_innovation' name='idea'),
 
     # Filebrowser
     (r'^admin/filebrowser/', include('filebrowser.urls')),
