@@ -246,8 +246,10 @@ def show_user_profile(request, username):
     """
     Given a username, displays a page full of information about them.
     """
-    user = User.objects.get(username=username)
-    if not user:
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
         return HttpResponseNotFound()
+
     return render_to_response('innovation/user_profile.html',
         {'user': user}, RequestContext(request))
