@@ -99,7 +99,7 @@ class SignUp(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class Search(AuthMixin, ProfileIncompleteMixin, TemplateView):
+class Search(ProfileIncompleteMixin, TemplateView):
     template_name = 'search.html'
 
     def get_context_data(self, **kwargs):
@@ -165,7 +165,7 @@ def new_innovation(request):
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
 
-class ShowInnovation(AuthMixin, ProfileIncompleteMixin, UpdateView):
+class ShowInnovation(ProfileIncompleteMixin, UpdateView):
     model = Item
     template_name = 'innovation/item.html'
     form_class = HeroImageForm
