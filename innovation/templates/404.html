@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load account %}
+{% block title %}About{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="span12">
+<h1 style="font-size: 54px; line-height: 62px;">&ldquo;They're pinging away with their active sonar like they're looking for something, but nobody's listening.&rdquo;</h1>
+<h2>Captain Davenport - The Hunt for Red October</h2>
+<hr/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <form action="/search" class="navbar-form pull-left" class="horizontal">
+            <div class="controls">
+            <strong>Why not search for something instead?</strong>
+            <div>
+            <div class="input-append">
+                <input  id="term" name="term" size="16" type="text">
+                <button class="btn" type="button">Search</button>
+            </div>
+        </form>
+<hr/>
+    </div>
+</div>
+
+
+{% endblock content %}

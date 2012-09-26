@@ -9,6 +9,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url('^$', Home.as_view(), name='home'),
+    url('^404$', TemplateView.as_view(template_name='404.html'), name='fourohfour'),
     url('^about$', TemplateView.as_view(template_name='about.html'), name='about'),
     url('^contact$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url('^accounts/signup/$', SignUp.as_view(), name='account_signup'),
