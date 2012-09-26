@@ -68,7 +68,7 @@ class Vote(models.Model):
 
     class Meta:
         ordering = ['-created_on']
-        unique_together = ("target_id", "target_type")
+        unique_together = ("target_id", "target_type", "created_by")
 
 
 Profile.register_extensions(InnovationProfile())

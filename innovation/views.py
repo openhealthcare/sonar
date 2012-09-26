@@ -222,13 +222,12 @@ def vote_up(request, target_type, target_id):
     import json
     from .models import Vote
 
-    if Vote.objects.filter(target_type=target_type,
-                           created_by=request.user,
-                           target_id=target_id).count() == 0:
-        v = Vote(target_type=target_type,
-                 target_id=target_id,
-                 created_by=request.user)
-        v.save()
+    if Vote.objects.filter(target_type=target_type).\
+            filter(created_by=request.user).\
+            filter(target_id=target_id).count() == 0:
+        Vote.objects.create(target_type=target_type,
+                            target_id=target_id,
+                            created_by=request.user)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', "/"))
 
