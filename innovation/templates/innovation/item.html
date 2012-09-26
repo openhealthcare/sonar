@@ -39,7 +39,7 @@
 
 
     <div id="summary" class="lead">
-        {{ item.summary|markdown }}
+        {{ item.summary|urlize|markdown}}
     </div>
 
 
@@ -47,22 +47,22 @@
           <hr/>
 
           <div id="summary" class="lead">
-            {{ item.summary|markdown }}
+            {{ item.summary|urlize|markdown }}
           </div>
 
           <h2>How it was used</h2>
           <div id="usecase">
-            {{ item.how_used|markdown }}
+            {{ item.how_used|urlize|markdown }}
           </div>
 
           <h2>Benefits and evidence</h2>
           <div id="benefits">
-            {{ item.benefits|markdown }}
+            {{ item.benefits|urlize|markdown }}
           </div>
 
           <h2>Further Information</h2>
           <div id="further-info">
-            {{ item.further_information|markdown }}
+            {{ item.further_information|urlize|markdown }}
           </div>
           <hr/>
 
