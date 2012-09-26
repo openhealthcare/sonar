@@ -6,6 +6,13 @@
 {% block content %}
 <h1>{{ title }}</h1>
 
+{% if form.errors %}
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+        Please correct the errors below.
+    </div>
+{% endif %}
+
 <form id="new_idea" method="post" action="{{ post_to }}">
     {% csrf_token %}
     {{ form|bootstrap }}

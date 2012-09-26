@@ -160,7 +160,7 @@ def new_innovation(request):
     else:
         form = ItemForm()
     context['form'] = form
-    context['post_to'] = '/idea/new'
+    context['post_to'] = '/idea/new/'
     context['title'] = 'Create new innovation'
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
