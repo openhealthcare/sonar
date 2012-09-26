@@ -90,7 +90,6 @@ ACCOUNT_USERNAME_REQUIRED = False
 CONTACT_EMAIL = DEFAULT_FROM_EMAIL
 LOGIN_REDIRECT_URL = '/'
 
-
 SECRET_KEY = 'z(pw08&amp;o@5@!9gr_ni#g@v8u!mv61(8u=5$74b2-p(@+095oo='
 SITE_ID = 1
 WSGI_APPLICATION = 'innovation.wsgi.application'
