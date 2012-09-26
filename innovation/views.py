@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render_to_response
@@ -29,7 +29,7 @@ class AuthMixin(object):
 
 class ProfileIncompleteMixin(object):
     def dispatch(self, request, *args, **kwargs):
-        if not hasattr(request.user, 'profile'):
+        if not hasattr(request.user, 'profile') and not isinstance(request.user, AnonymousUser):
             return CompleteProfile.dispatch(CompleteProfile(), request, *args, **kwargs)
         return super(ProfileIncompleteMixin, self).dispatch(request, *args, **kwargs)
 
@@ -99,7 +99,7 @@ class SignUp(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class Search(AuthMixin, ProfileIncompleteMixin, TemplateView):
+class Search(ProfileIncompleteMixin, TemplateView):
     template_name = 'search.html'
 
     def get_context_data(self, **kwargs):
@@ -165,7 +165,7 @@ def new_innovation(request):
     return render_to_response('innovation/edit_item.html', context,
         RequestContext(request))
 
-class ShowInnovation(AuthMixin, ProfileIncompleteMixin, UpdateView):
+class ShowInnovation(ProfileIncompleteMixin, UpdateView):
     model = Item
     template_name = 'innovation/item.html'
     form_class = HeroImageForm
