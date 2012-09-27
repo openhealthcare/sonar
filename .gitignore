@@ -8,6 +8,8 @@ bin/
 build/
 include/
 lib/
+src/
+local/
 readline-6.2.2-py2.7-macosx-10.7-intel.egg/
 .DS_Store
 env
