@@ -45,8 +45,10 @@ USE_I18N = False  # Internationalization
 MEDIA_ROOT = os.path.join(DIRNAME, 'client_media')
 MEDIA_URL = '/client_media/'
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
-STATIC_URL = 'http://sonarstatic.openhealthcare.org.uk/'
-ADMIN_MEDIA_PREFIX = STATIC_URL + "admin/"
+STATIC_URL = '/static/'
+#STATIC_URL = 'http://sonarstatic.openhealthcare.org.uk/'
+#ADMIN_MEDIA_PREFIX = STATIC_URL + "/admin/"
+ADMIN_MEDIA_PREFIX = "/admin/"
 
 TEMPLATE_DEBUG = DEBUG
 TEMPLATE_DIRS = (os.path.join(DIRNAME, 'templates'))
@@ -185,7 +187,7 @@ SOUTH_MIGRATION_MODULES = {
 }
 
 #DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # File Browser
 FILEBROWSER_VERSIONS = {
