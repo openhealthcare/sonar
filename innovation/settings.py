@@ -11,6 +11,11 @@ DEBUG = bool(os.environ.get('DEBUG', False))
 # DATABASES = {'default': dj_database_url.config(default='postgres://localhost/innovation')}
 DATABASES = {'default': dj_database_url.config(default='sqlite:///%s/innovation.db' % DIRNAME)}
 
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+AWS_STORAGE_BUCKET_NAME = 'nhsonar'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -40,7 +45,7 @@ USE_I18N = False  # Internationalization
 MEDIA_ROOT = os.path.join(DIRNAME, 'client_media')
 MEDIA_URL = '/client_media/'
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
-STATIC_URL = '/static/'
+STATIC_URL = 'http://nhsonar.s3.amazonaws.com/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + "/admin/"
 
 TEMPLATE_DEBUG = DEBUG
@@ -179,6 +184,8 @@ SOUTH_MIGRATION_MODULES = {
     'profiles': 'innovation.projectmigrations.profiles',
 }
 
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # File Browser
 FILEBROWSER_VERSIONS = {
@@ -191,3 +198,10 @@ FILEBROWSER_VERSIONS = {
     'croppedthumbnail': {'verbose_name': 'Cropped Thumbnail (140x140px)', 'width': 140, 'height': 140, 'opts': 'crop'},
     'item_banner': {'verbose_name': 'Item Banner', 'width': 550, 'height': 351, 'opts': 'crop upscale'},
 }
+
+
+try:
+    from local_settings import *
+except:
+    pass
+
