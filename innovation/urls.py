@@ -3,12 +3,13 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 
-from .views import CompleteProfile, Home, SignUp, Search, EditProfile, ShowInnovation
+from .views import CompleteProfile, Home, SignUp, Search, EditProfile, ShowInnovation, crossdomain
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url('^$', Home.as_view(), name='home'),
+    url('^crossdomain.xml$', crossdomain, name='crossdomain'),
     url('^404$', TemplateView.as_view(template_name='404.html'), name='fourohfour'),
     url('^about$', TemplateView.as_view(template_name='about.html'), name='about'),
     url('^contact$', TemplateView.as_view(template_name='contact.html'), name='contact'),

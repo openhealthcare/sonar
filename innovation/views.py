@@ -8,7 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.defaultfilters import slugify
@@ -20,6 +20,14 @@ from .forms import CompleteProfileForm, ItemForm, EditItemForm, HeroImageForm, P
 from .models import Item, Vote
 from .utils import method_decorator
 
+
+def crossdomain(request):
+    r = HttpResponse(mimetype='text/xml')
+    r.write("""<?xml version="1.0" ?>
+<cross-domain-policy>
+<allow-access-from domain="*" />
+</cross-domain-policy>""")
+    return r
 
 class AuthMixin(object):
     @method_decorator(login_required)
