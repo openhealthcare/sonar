@@ -14,7 +14,7 @@ DATABASES = {'default': dj_database_url.config(default='sqlite:///%s/innovation.
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-AWS_STORAGE_BUCKET_NAME = 'nhsonar'
+AWS_STORAGE_BUCKET_NAME = 'sonarstatic.openhealthcare.org.uk'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -45,8 +45,8 @@ USE_I18N = False  # Internationalization
 MEDIA_ROOT = os.path.join(DIRNAME, 'client_media')
 MEDIA_URL = '/client_media/'
 STATIC_ROOT = os.path.join(DIRNAME, 'static')
-STATIC_URL = 'http://nhsonar.s3.amazonaws.com/'
-ADMIN_MEDIA_PREFIX = STATIC_URL + "/admin/"
+STATIC_URL = 'http://sonarstatic.openhealthcare.org.uk/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + "admin/"
 
 TEMPLATE_DEBUG = DEBUG
 TEMPLATE_DIRS = (os.path.join(DIRNAME, 'templates'))
