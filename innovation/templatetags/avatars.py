@@ -7,6 +7,8 @@ register = template.Library()
 @register.simple_tag
 def avatar(user):
     from allauth.socialaccount.models import SocialAccount
+    if str(user)  == 'AnonymousUser':
+        return ""
     try:
         acc = SocialAccount.objects.get(user=user)
         return acc.get_avatar_url()
